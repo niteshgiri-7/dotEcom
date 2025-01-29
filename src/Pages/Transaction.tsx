@@ -1,9 +1,9 @@
-import SideBar from "../Components/SideBar"
+import NavBar from "../Components/NavBar"
 
 const Transaction = () => {
   return (
     <div>
-  <SideBar/>
+  <NavBar/>
     </div>
   )
 }
