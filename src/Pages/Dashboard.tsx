@@ -1,10 +1,10 @@
 import { BiMaleFemale, BiSearch } from "react-icons/bi";
 import { RiNotification2Line, RiUser2Line } from "react-icons/ri";
-import NavBar from "../Components/NavBar";
-import Card from "../Components/Card";
 import BarChart from "../Components/BarChart";
+import Card from "../Components/Card";
+import DashboardTable from "../Components/DashboardTable";
 import DoughnutChart from "../Components/DoughnutChart";
-import { Table } from "../Components/Table";
+import NavBar from "../Components/NavBar";
 
 
 const Dashboard = () => {
@@ -104,13 +104,7 @@ const Dashboard = () => {
               <DoughnutChart backgroundColor={["pink", "blue"]} data={[12, 23]} labels={["Female", "Male"]} cutout={90} />
             </div>
           </div>
-          <div className="mt-5 pt-2 w-full h-fit lg:mt-0 lg:flex-1 lg:h-[25rem] bg-white rounded-xl lg:p-5 text-sm md:text-lg">
-            <h2 className="font-bold text-2xl text-center">TOP TRANSACTION</h2>
-            <div className="lg:p-3  flex justify-center items-center">
-
-            <Table />
-            </div>
-          </div>
+        <DashboardTable/>
         </section>
 
       </main>
@@ -125,6 +119,7 @@ interface inventoryPropsType {
 
 const Inventory = ({ inStock, name }: inventoryPropsType) => {
   const color = `hsl(${Math.round((inStock / 100) * 120)}, 100%, 50%)`;
+
 
   return (
     <div className="flex items-center gap-2 w-full  p-3">
