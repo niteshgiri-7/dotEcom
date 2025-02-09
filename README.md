@@ -1,50 +1,28 @@
-# React + TypeScript + Vite
+# **dotEcom(Frontend)**
+🚀 **Admin Dashboard for dotEcom(till now)** | Built with React, TypeScript, and TanStack Table  
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## **Overview**
+dotEcom-Admin is the frontend for the **dotEcom-Server** backend. Features admin dashboard that provides an intuitive interface for managing products, transactions, and customers data while using data visualization tools like pie-chart,bar-chart for better insights.
 
-Currently, two official plugins are available:
+## **Tech Stack**
+- **Frontend:** React, TypeScript, Vite  
+- **State Management:** React Query (@tanstack/query)  
+- **Tables:** TanStack Table (@tanstack/table)  
+- **Charts:** React-chartjs-2 
+- **Routing:** React Router  
+- **Styling:** Tailwind CSS 
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## **Features**
+✅ **Dynamic Dashboard** – Visualize key metrics using charts  
+✅ **Product Management** – CRUD operations on products  
+✅ **Customer Insights** – View and manage customer details  
+✅ **Transaction Tracking** – Monitor order transactions  
+✅ **Data Tables** – Interactive tables with sorting and pagination  
 
-## Expanding the ESLint configuration
+## **To-Do (In Development)**
+- [ ] **Integrate dotEcom-Server(backend)**
+- [ ] **Implement Authentication (Login/Logout)**
+- [ ] **Add Export Feature for Reports (CSV, PDF)**
+- [ ] **Implement dotEcom customer's UI(product pages,cart,checkout etc)**
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
 
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
-
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
