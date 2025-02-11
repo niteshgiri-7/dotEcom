@@ -19,10 +19,6 @@ ChartJS.register(
   Tooltip,
   Legend
 );
-
-
-
-
 interface BarChartPropsType{
      horizontal?:boolean;
      dataSet_1:number[];
@@ -32,13 +28,9 @@ interface BarChartPropsType{
      labels?:string[];
      title1:string;
      title2:string;
-
-
 }
 
 const months = ['January', 'February', 'March', 'April', 'May', 'June'];
-
-
 
 const BarChart=({horizontal=false,dataSet_1,dataSet_2,bgColor1,bgColor2,labels=months,title1,title2}:BarChartPropsType)=> {
 
