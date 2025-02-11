@@ -49,7 +49,7 @@ const TableHOC = <T extends object, U>(columns: ColumnDef<T, U>[], data: T[], he
         }, []);
 
         return (
-            <div className="mt-5 pt-2 w-full h-fit lg:mt-0 lg:flex-1 lg:h-[25rem]  rounded-xl lg:p-5 text-sm md:text-lg bg-white">
+            <div className="mt-5 pt-2 max-w-full h-fit lg:mt-0 lg:flex-1 rounded-xl lg:p-5 text-sm md:text-lg bg-white">
                 <h2 className="font-bold text-2xl text-center">{heading}</h2>
                 <div className="lg:p-3 p-2  flex flex-col justify-center items-center">
 

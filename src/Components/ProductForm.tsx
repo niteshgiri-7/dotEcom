@@ -48,7 +48,7 @@ const ProductForm = ({closeForm,productToManage}:{closeForm?:productFormPropsTyp
     }
     return (
         <div className={`max-w-screen  flex justify-center items-center ${closeForm && "h-screen absolute top-1/2 left-1/2 transition-transform -translate-x-1/2 -translate-y-1/2 z-20"}`}>
-            <div className="max-w-[30rem] h-fit bg-white rounded-lg shadow-xl shadow-gray-700 p-8 flex flex-col justify-center items-center relative">
+            <div className="max-w-[90vw] h-fit bg-white rounded-lg shadow-xl shadow-gray-700 p-8 flex flex-col justify-center items-center relative">
              { closeForm &&  <IoClose className="absolute top-3 right-3 text-3xl cursor-pointer" onClick={closeForm}/>}
                 <h1>
                     <strong>Add New Product</strong>
