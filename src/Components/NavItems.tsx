@@ -2,11 +2,11 @@
 import { Link, useLocation } from 'react-router-dom'
 import { NavItemsType } from './NavBar'
 
-const NavItems = ({navItem}:{navItem:NavItemsType[]}) => {
+const NavItems = ({navItem,name}:{navItem:NavItemsType[],name:string}) => {
    const currentLocation = useLocation();
   return (
     <div className="mt-3">
-    <p className="text-lg text-gray-500">Dashboard</p>
+    <p className="text-lg text-gray-500">{name}</p>
     <ul>
         {navItem.map((item, idx) => (
             <Link to={item.url} key={idx}>

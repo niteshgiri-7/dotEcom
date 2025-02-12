@@ -16,7 +16,7 @@ export interface NavItemsType {
     icon: IconType;
 }
 
-
+//TODO: show toast after tossing the coin
 
 const NavBar = () => {
 
@@ -93,11 +93,11 @@ const NavBar = () => {
 
                 <h1 className="mt-4 text-2xl md:text-4xl">Logo</h1>
 
-               <NavItems navItem={dashboardItems}/>
+               <NavItems navItem={dashboardItems} name="Dashboard"/>
 
-                <NavItems navItem={chartItems}/>
+                <NavItems navItem={chartItems} name="Charts"/>
 
-              <NavItems navItem={utilItems}/>
+              <NavItems navItem={utilItems} name="Utils"/>
 
             </nav>
             {isOpen && <div className='min-h-screen w-screen fixed z-10 bg-black bg-opacity-50 backdrop-filter blur-sm' onClick={handleToggle}>
