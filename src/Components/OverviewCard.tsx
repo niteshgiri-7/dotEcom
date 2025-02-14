@@ -1,18 +1,17 @@
 import { BiTrendingDown, BiTrendingUp } from 'react-icons/bi';
+import { OverViewCountType } from '../types/dashboard';
 
-interface cardPropsType {
-    header: string;
-    amount: number;
-    rate: number;
-    color: string;
-}
-const Card = ({ header, amount, rate ,color}: cardPropsType) => {
+
+const OverviewCard = ({ name, count, rate }: OverViewCountType) => {
+    
+    const color = `hsl(${Math.round((rate / 100) * 120)}, 100%, 45%)`;
+
     return (
-        <div className='bg-white rounded-md p-4 flex gap-2 shadow-md shadow-gray-400 m-auto md:m-0 '>
+        <div className='bg-white  rounded-md p-4 flex gap-2 shadow-md shadow-gray-400  md:m-0 min-w-[200px] max-w-[200px]'>
             <div className='flex flex-col'>
-                <span className='font-bold text-sm text-gray-500'>{header}</span>
-                <span className='font-bold text-lg md:text-2xl'>{amount}</span>
-                <div className='flex items-center gap-1'>
+                <span className='font-bold text-sm text-gray-500 text-center'>{name.toUpperCase()}</span>
+                <span className='font-bold text-lg md:text-2xl '>{count}</span>
+                <div className='flex justify-center items-center gap-1'>
                     {rate > 0 ? <BiTrendingUp className='text-green-500'/> : <BiTrendingDown className='text-red-500'/>}
                     <span>{rate}%</span>
                 </div>
@@ -31,4 +30,4 @@ const Card = ({ header, amount, rate ,color}: cardPropsType) => {
     )
 }
 
-export default Card
+export default OverviewCard;

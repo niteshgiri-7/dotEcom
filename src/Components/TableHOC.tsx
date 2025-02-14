@@ -5,11 +5,11 @@ import { FcGenericSortingAsc, FcGenericSortingDesc } from 'react-icons/fc';
 const TableHOC = <T extends object, U>(columns: ColumnDef<T, U>[], data: T[], heading: string, showPagination: boolean = false) => {
 
     const StatusColor = {
-        Pending: "hsl(48, 100%, 67%)", // Soft Yellow (Indicates waiting)
-        Processing: "hsl(220, 90%, 65%)", // Cool Blue (Represents active work in progress)
-        Shipped: "hsl(204, 86%, 53%)", // Strong Teal (Represents movement & transit)
-        Delivered: "hsl(120, 50%, 50%)", // Deep Green (Represents success & completion)
-        Cancelled: "hsl(0, 85%, 55%)", // Bright Red (Represents termination)
+        pending: "hsl(48, 100%, 67%)", // Soft Yellow (Indicates waiting)
+        processing: "hsl(220, 90%, 65%)", // Cool Blue (Represents active work in progress)
+        shipped: "hsl(204, 86%, 53%)", // Strong Teal (Represents movement & transit)
+        delivered: "hsl(120, 50%, 50%)", // Deep Green (Represents success & completion)
+        cancelled: "hsl(0, 85%, 55%)", // Bright Red (Represents termination)
         default: "hsl(0, 0%, 95%)", // Light Gray (Neutral for unknown statuses)
     };
 
@@ -82,7 +82,7 @@ const TableHOC = <T extends object, U>(columns: ColumnDef<T, U>[], data: T[], he
                             {table.getRowModel().rows.map(row => (
                                 <tr key={row.id}>
                                     {row.getVisibleCells().map(cell => {
-                                        const status = (cell.column.id === "Status" ? cell.getValue() : StatusColor.default) as keyof typeof StatusColor;
+                                        const status = (cell.column.id === "status" ? cell.getValue() : StatusColor.default) as keyof typeof StatusColor;
                                         return (
                                             <td className={`text-center  rounded-2xl p-1`} key={cell.id} style={{ backgroundColor: StatusColor[status] }}>
                                                 {flexRender(cell.column.columnDef.cell, cell.getContext())}

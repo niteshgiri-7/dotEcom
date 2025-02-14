@@ -1,78 +1,40 @@
 import { ColumnDef } from '@tanstack/react-table';
 import { useMemo } from 'react';
 import TableHOC from './TableHOC';
+import { TransactionType } from '../types/dashboard';
 
-type Transaction = {
-  Id: string;
-  Quantity: number;
-  Discount: number;
-  Amount: number;
-  Status: string;
-};
 
-const data: Transaction[] = [
-  {
-    Id: "fadksfasf",
-    Quantity: 10,
-    Discount: 200,
-    Amount: 9999,
-    Status: "Pending"
-  },
-  {
-    Id: "fadksfasf",
-    Quantity: 20,
-    Discount: 200,
-    Amount: 9999,
-    Status: "Cancelled"
-  },
-  {
-    Id: "fadksfasf",
-    Quantity: 30,
-    Discount: 200,
-    Amount: 9999,
-    Status: "Delivered"
-  },
-  {
-    Id: "fadksfasf",
-    Quantity: 40,
-    Discount: 200,
-    Amount: 9999,
-    Status: "Shipped"
-  },
-  {
-    Id: "fadksfasf",
-    Quantity: 40,
-    Discount: 200,
-    Amount: 9999,
-    Status: "Shipped"
-  },
 
-];
+const DashboardTable = ({data}:{data:TransactionType[]}) => {
+  
+   const modifiedTableData = data.map(d=>d.status==="pending payment"?{...d,status:"pending"}:d); // shortening and to match the cell value to give semantic color for status
 
-const DashboardTable = () => {
-
-  const columns = useMemo<ColumnDef<Transaction, string>[]>(
+  const columns = useMemo<ColumnDef<TransactionType, string>[]>(
     () => [
       {
-        accessorKey: 'Id',
+        accessorKey: '_id',
         cell: (info) => info.getValue(),
         enableSorting: false,
       },
       {
-        accessorKey: "Amount",
+        accessorKey: "total",
         cell: (info) => info.getValue(),
+        header:()=>"Total"
       },
       {
-        accessorKey: "Discount",
+        accessorKey: "discount",
         cell: (info) => info.getValue(),
+        header:()=>"Discount"
       },
       {
-        accessorKey: "Quantity",
-        cell: (info) => info.getValue()
+        accessorKey: "quantity",
+        cell: (info) => info.getValue(),
+        header:()=>"Quantity"
       },
       {
-        accessorKey: "Status",
-        cell: (info) => info.getValue()
+        accessorKey: "status",
+        cell: (info) => info.getValue(),
+        header:()=>"Status"
       }
     ],
     []
@@ -80,7 +42,7 @@ const DashboardTable = () => {
 
 
   return (
-    TableHOC<Transaction, string>(columns, data, "TOP TRANSACTION")()
+    TableHOC<TransactionType, string>(columns, modifiedTableData, "LATEST TRANSACTION")()
     // data being passed is of type transaction <T>, ani string means cell value is string <U>
   )
 }

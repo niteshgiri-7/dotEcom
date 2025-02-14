@@ -1,46 +1,23 @@
+import { Toaster } from "react-hot-toast";
 import { BiMaleFemale, BiSearch } from "react-icons/bi";
 import { RiNotification2Line, RiUser2Line } from "react-icons/ri";
 import BarChart from "../Components/BarChart";
-import Card from "../Components/Card";
 import DashboardTable from "../Components/DashboardTable";
 import DoughnutChart from "../Components/DoughnutChart";
+import Loader from "../Components/Loader";
 import NavBar from "../Components/NavBar";
+import OverviewCard from "../Components/OverviewCard";
+import { useDashboard } from "../hooks/useDashboard";
+import { useErrorNotification } from "../hooks/useErrorNotification";
+import { InventoryDataType } from "../types/dashboard";
 
 
 const Dashboard = () => {
-  const Cards = [{
-    header: "Revenue",
-    amount: 34000,
-    rate: 90,
-    color: "green"
-  },
-  {
-    header: "Revenue",
-    amount: 34000,
-    rate: -40,
-    color: "green"
-  },
-  {
-    header: "Revenue",
-    amount: 34000,
-    rate: 40,
-    color: "green"
-  },
-  {
-    header: "Revenue",
-    amount: 34000,
-    rate: 40,
-    color: "green"
-  }]
 
-  const InventoryItems: inventoryPropsType[] = [
-    { name: "laptops", inStock: 99 },
-    { name: "laptops", inStock: 9 },
-    { name: "laptops", inStock: 79 },
-    { name: "laptops", inStock: 49 },
-  ]
-  
+  const { dashboardData, isError, error } = useDashboard();
+  useErrorNotification(isError, error, error?.message);
 
+  if (!dashboardData) return <Loader />
 
   return (
     <div className="md:flex ">
@@ -62,36 +39,46 @@ const Dashboard = () => {
 
         <hr className="md:mt-4 h-1 bg-gray-300 "></hr>
 
-        {/* RevenueSection */}
+        {/* CardsSection */}
 
-        <section className="mt-2 flex flex-wrap gap-3 justify-between  xl:justify-center xl:gap-10 xl:pl-16 xl:pr-16">
+        <section className="mt-2 flex flex-wrap gap-3 justify-center  xl:justify-center xl:gap-10 xl:pl-16 xl:pr-16">
 
-          {Cards.map((card, idx) => (
-            <Card key={idx} header={card.header} amount={card.amount} rate={card.rate} color={card.color} />
-          ))}
+          {
+            dashboardData.stats.overviewCount.map((data, idx) => (
+              <OverviewCard key={idx} name={data.name} count={data.count} rate={data.rate} />
+            ))
+          }
 
         </section>
         {/* Charts and inventory section  */}
-        <section className="mt-16  min-h-[50vh] lg:flex gap-3">
+        <section className="mt-5  min-h-[50vh] lg:flex gap-3">
           {/* Inventory Item In stock Percentage */}
           <div className=" bg-white rounded-lg w-[100%]  m-auto lg:m-0 p-3 lg:w-[25%] lg:h-[65vh] lg:mt-5 order-2">
             <h1 className="font-bold text-xl text-center lg:text-3xl lg:mt-6">Inventory</h1>
             <div className="h-3/4 flex flex-col justify-center items-center ">
-              {InventoryItems.map((item, idx) => (<Inventory key={idx} inStock={item.inStock} name={item.name} />))}
+
+              {
+                dashboardData.stats.inventoryStats.map((item, idx) => (
+                  <Inventory key={idx} name={item.name} count={item.count} percentage={item.percentage} />
+                ))
+              }
+
             </div>
           </div>
+
           {/* BarChart */}
           <div className="mt-5 h-[30vh] flex-1 flex justify-center items-center lg:h-[65vh] ">
             <div className="h-full w-full bg-white rounded-lg">
               <BarChart
-                dataSet_1={[123, 432, 456, 78, 231, 444]}
-                dataSet_2={[222, 78, 231, 444, 123, 456]}
-                title1="Revenue" title2="Transaction"
+                dataSet_1={dashboardData.stats.lastSixMnthsStats.ordersCreated}
+                dataSet_2={dashboardData.stats.lastSixMnthsStats.revenueGenerated}
+                title1="Revenue" title2="Orders"
                 bgColor1="rgb(0,115,255)"
                 bgColor2="rgba(53,162,235,0.8)"
               />
             </div>
           </div>
+
         </section>
 
         {/* Gender Ratio and  Top Transaction section*/}
@@ -101,39 +88,38 @@ const Dashboard = () => {
             <h1 className="font-bold text-2xl text-center ">Gender Ratio</h1>
             <BiMaleFemale size={30} className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
             <div className="w-[20rem] h-[20rem] mt-5 m-auto ">
-              <DoughnutChart backgroundColor={["pink", "blue"]} data={[12, 23]} labels={["Female", "Male"]} cutout={90} />
+              <DoughnutChart backgroundColor={["pink", "blue"]} data={[dashboardData.stats.genderRatio.female,dashboardData.stats.genderRatio.male]} labels={["Female", "Male"]} cutout={90} />
             </div>
           </div>
-        <DashboardTable/>
+          <DashboardTable data={dashboardData.stats.latestTransactions} />
         </section>
 
       </main>
+      <Toaster position="top-center" />
     </div>
   )
 };
 
-interface inventoryPropsType {
-  name: string;
-  inStock: number;
-}
 
-const Inventory = ({ inStock, name }: inventoryPropsType) => {
-  const color = `hsl(${Math.round((inStock / 100) * 120)}, 100%, 50%)`;
+
+const Inventory = ({ name, count, percentage }: InventoryDataType) => {
+  const color = `hsl(${percentage / 100 * 120}, 100%, 50%)`;
 
 
   return (
-    <div className="flex items-center gap-2 w-full  p-3">
-      <span>{name}</span>
+    <div className="flex items-center gap-2 w-full my-2">
+      <span className="min-w-[20%] font-semibold text-start">{name.toLowerCase()}</span>
       <div className="w-full  rounded-lg h-2">
         <div
           className="h-2 rounded-lg"
           style={{
             backgroundColor: color,
-            width: `${inStock}%`,
+            width: `${percentage}%`,
           }}
         ></div>
       </div>
-      <span className="max-w-10">{inStock}%</span>
+      <span>({count})</span>
+      <span className="max-w-10">{percentage}%</span>
     </div>
   );
 };
