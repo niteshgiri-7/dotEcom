@@ -4,7 +4,7 @@ import NavBar from "../Components/NavBar";
 
 const StopWatch = () => {
   const [isClockRunning, setIsClockRunning] = useState<boolean>(false);
-  const [intervalId, setIntervalId] = useState<number | null>(null);
+  const [intervalId, setIntervalId] = useState<NodeJS.Timeout | null>(null);
   const [watch, setWatch] = useState({ hr: 0, min: 0, sec: 0 });
 
   useEffect(() => {
