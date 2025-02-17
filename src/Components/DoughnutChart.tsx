@@ -9,6 +9,7 @@ import {
   Tooltip,
 } from 'chart.js';
 import { ChartData, ChartOptions } from 'chart.js';
+import { memo } from 'react';
 import { Doughnut } from 'react-chartjs-2';
 
 ChartJS.register(
@@ -30,7 +31,8 @@ interface DoughnutChartPropsType {
      cutout?:number|string;
 }
 
-const DoughnutChart = ({offset,legends=true,labels,data,backgroundColor,cutout}:DoughnutChartPropsType) => {
+const DoughnutChart = memo(({offset,legends=true,labels,data,backgroundColor,cutout}:DoughnutChartPropsType) => {
+  console.log("donot chart")
 const doughnutData:ChartData<"doughnut",number[],string>={
   labels,
   datasets:[{
@@ -57,6 +59,6 @@ maintainAspectRatio:false,
   return (
    <Doughnut data={doughnutData} options={doughnutOptions}/>
   )
-}
+});
 
 export default DoughnutChart;

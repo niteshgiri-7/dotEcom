@@ -24,9 +24,9 @@ const Toss = () => {
   }
 
   return (
-    <div className="flex h-screen w-screen bg-gray-200">
+    <div className="flex min-h-screen w-screen bg-gray-200">
       <NavBar/>
-      <main className="flex-1 flex justify-center items-center relative">
+      <main className="flex-1 flex justify-center items-center relative bg-gray-200">
           <h1 className="mt-10 mx-10 text-3xl font-bold absolute top-0 left-0">Coin Toss</h1>
         <div className=" ">
           <div className={`h-[200px] w-[200px] bg-gray-300 rounded-full relative border border-gray-600 ${isFlipping?"animate-flip shadow-lg shadow-gray-600":"animate-none"}`}>

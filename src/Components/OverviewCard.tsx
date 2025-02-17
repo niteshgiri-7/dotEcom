@@ -1,9 +1,10 @@
 import { BiTrendingDown, BiTrendingUp } from 'react-icons/bi';
 import { OverViewCountType } from '../types/dashboard';
+import { memo } from 'react';
 
 
-const OverviewCard = ({ name, count, rate }: OverViewCountType) => {
-    
+const OverviewCard = memo(({ name, count, rate }: OverViewCountType) => {
+    console.log("card")
     const color = `hsl(${Math.round((rate / 100) * 120)}, 100%, 45%)`;
 
     return (
@@ -28,6 +29,6 @@ const OverviewCard = ({ name, count, rate }: OverViewCountType) => {
             </div>
         </div>
     )
-}
+});
 
 export default OverviewCard;

@@ -10,14 +10,14 @@ const TableHOC = <T extends object, U>(columns: ColumnDef<T, U>[], data: T[], he
         shipped: "hsl(204, 86%, 53%)", // Strong Teal (Represents movement & transit)
         delivered: "hsl(120, 50%, 50%)", // Deep Green (Represents success & completion)
         cancelled: "hsl(0, 85%, 55%)", // Bright Red (Represents termination)
-        default: "hsl(0, 0%, 95%)", // Light Gray (Neutral for unknown statuses)
+        default: "rgb(255,255,255)", // Light Gray (Neutral for unknown statuses)
     };
 
     return function Table() {
 
         const [sorting, setSorting] = useState<SortingState>([]);
         const [pagination, setPagination] = useState<PaginationState>({ pageIndex: 0, pageSize: 6 });
-
+        
         const table = useReactTable({
             data,
             columns,
@@ -82,7 +82,12 @@ const TableHOC = <T extends object, U>(columns: ColumnDef<T, U>[], data: T[], he
                             {table.getRowModel().rows.map(row => (
                                 <tr key={row.id}>
                                     {row.getVisibleCells().map(cell => {
-                                        const status = (cell.column.id === "status" ? cell.getValue() : StatusColor.default) as keyof typeof StatusColor;
+                                        let status :keyof typeof StatusColor="default";
+                                            
+                                        if(cell.column.id==="status"){
+                                           status  =   cell.getValue()==="pending payment"?"pending":cell.getValue() as keyof typeof StatusColor
+                                        }
+                                         
                                         return (
                                             <td className={`text-center  rounded-2xl p-1`} key={cell.id} style={{ backgroundColor: StatusColor[status] }}>
                                                 {flexRender(cell.column.columnDef.cell, cell.getContext())}
