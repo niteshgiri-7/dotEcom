@@ -1,6 +1,6 @@
 import { AxiosRequestConfig } from "axios";
 import { ProductFormData, ProductResponse } from "../types/product";
-import Axios from "../api/axiosInstance";
+import Axios from "./axiosInstance";
 import { appendFormData } from "../utils/appendFormData";
 
 export const getAllProducts = async (): Promise<ProductResponse> => {

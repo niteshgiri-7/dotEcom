@@ -14,7 +14,7 @@ const TableHOC = <T extends object, U>(columns: ColumnDef<T, U>[], data: T[], he
     };
 
     return function Table() {
-
+        
         const [sorting, setSorting] = useState<SortingState>([]);
         const [pagination, setPagination] = useState<PaginationState>({ pageIndex: 0, pageSize: 6 });
         
@@ -99,7 +99,7 @@ const TableHOC = <T extends object, U>(columns: ColumnDef<T, U>[], data: T[], he
                             ))}
                         </tbody>
                     </table>
-                    {showPagination && <div className='flex gap-3 mt-1 items-center'>
+                    {showPagination && <div className='flex gap-3 mt-1 items-center '>
                         <button className='bg-gray-300 px-4 py-2 rounded-lg font-semibold hover:bg-opacity-60 cursor-pointer' onClick={() => table.previousPage()} disabled={!table.getCanPreviousPage()}>Prev</button>
                         <strong>{`Page ${table.getState().pagination.pageIndex + 1} of ${table.getPageCount().toLocaleString()}`}</strong>
                         <button className='bg-gray-300 px-4 py-2 rounded-lg font-semibold hover:bg-opacity-60 cursor-pointer' onClick={() => table.nextPage()} disabled={!table.getCanNextPage()}>Next</button>

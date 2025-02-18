@@ -10,6 +10,7 @@ import { BASEURL } from "../utils/constants";
 import { useQueryClient } from "@tanstack/react-query";
 import { useDeleteProduct } from "../hooks/useDeleteProduct";
 import ClipLoader from "react-spinners/ClipLoader";
+import { Toaster } from "react-hot-toast";
 
 const ManageProduct = () => {
 
@@ -62,6 +63,7 @@ const ManageProduct = () => {
 
           </main>
       }
+      <Toaster position="top-center"/>
     </div>
   )
 }
