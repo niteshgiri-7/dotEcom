@@ -23,7 +23,7 @@ export const useAddNewProduct = (closeForm: () => void) => {
         // here,callback returns an object with copy of the oldApi response(which has property as Products(an array)).
         //copies the original array as it is in the (old.Products) and adds new object(productFormData) inside the Products array
         //fallback for the products as empty array, because initially there could be no products in the database
-        queryClient.setQueryData(["allProducts"], (old: ProductResponse)=>({...old,Products:[...(old.Products || [] ),newProduct]}));
+        queryClient.setQueryData(["allProducts"], (old: ProductResponse)=>({...old,Products:[...(old?.Products || [] ),newProduct]}));
 
 
         return { prevProductApiResponse };

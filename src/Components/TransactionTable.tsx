@@ -32,6 +32,11 @@ const TransactionTable = ({data}:{data:Transaction[]})=>{
             header:'Quantity',
             cell:(info)=>info.getValue()
         },
+        {    
+             accessorKey:"total",
+             header:'Total',
+             cell:(info)=>info.getValue()
+        },
         {
             accessorKey:'status',
             header:'Status',

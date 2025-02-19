@@ -24,7 +24,7 @@ const OverviewCard = memo(({ name, count, rate }: OverViewCountType) => {
                 )`
             }}>
              <div className=' w-[4rem] h-[4rem] bg-white  rounded-full absolute-center flex justify-center items-center'>
-              {rate>0?"+":""}{rate}%
+              {rate>0?"+":""}{rate.toString().length>4?">1000":rate}%
              </div>
             </div>
         </div>
