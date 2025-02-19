@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { IconType } from "react-icons";
 import { AiFillProduct } from "react-icons/ai";
-import { BiBarChart, BiCoin, BiLineChart, BiPieChart, BiStopwatch } from "react-icons/bi";
+import { BiCoin, BiStopwatch } from "react-icons/bi";
 import { HiMenu } from "react-icons/hi";
 import { IoClose } from "react-icons/io5";
 import { PiFileDashedBold } from "react-icons/pi";
@@ -50,23 +50,6 @@ const NavBar = () => {
         },
     ];
 
-    const chartItems: NavItemsType[] = [
-        {
-            icon: BiBarChart,
-            url: "/admin/bar-chart",
-            text: "Bar",
-        },
-        {
-            icon: BiPieChart,
-            url: "/admin/pie-chart",
-            text: "Pie",
-        },
-        {
-            icon: BiLineChart,
-            url: "/admin/line-chart",
-            text: "Line",
-        },
-    ]
 
     const utilItems: NavItemsType[] = [
         {
@@ -95,7 +78,7 @@ const NavBar = () => {
 
                <NavItems navItem={dashboardItems} name="Dashboard"/>
 
-                <NavItems navItem={chartItems} name="Charts"/>
+                {/* <NavItems navItem={chartItems} name="Charts"/> */}
 
               <NavItems navItem={utilItems} name="Utils"/>
 

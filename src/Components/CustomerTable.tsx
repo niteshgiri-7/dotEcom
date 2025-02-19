@@ -15,7 +15,7 @@ const CustomerTable = ({data}:{data:CustomerData[]}) => {
         {
             accessorKey: 'photo',
             header: 'Photo',
-            cell: (info) => <img src={`${BASEURL}+${info.getValue()}`} className="max-h-[50px] md:max-h-[70px] mx-auto rounded-full" alt="customer-photo"/>,
+            cell: (info) => <img src={`${BASEURL}${info.getValue()}`} className="max-h-[50px] md:max-h-[70px]  md:min-w-[70px] mx-auto rounded-full" alt="customer-photo"/>,
             enableSorting: false,
         },
         {

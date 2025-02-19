@@ -11,6 +11,7 @@ import { useDashboard } from "../hooks/useDashboard";
 import { useErrorNotification } from "../hooks/useErrorNotification";
 import { InventoryDataType } from "../types/dashboard";
 import { memo } from "react";
+import WowSuchEmpty from "../Components/WowSuchEmpty";
 
 
 const Dashboard = () => {
@@ -20,7 +21,7 @@ const Dashboard = () => {
   useErrorNotification(isError, error, "Something went Wrong! Please refresh the page");
 
   
-
+ console.log(dashboardData)
   return (
     <div className="md:flex ">
 
@@ -28,7 +29,10 @@ const Dashboard = () => {
    
       {/* mainContainer */}
         {
-         isPending || !dashboardData ? <Loader/> :
+         isPending  ? <Loader/> :
+      
+         dashboardData?.stats ?
+
       <main className="md:flex-1 min-h-screen   bg-gray-100 p-8 ">
 
         {/* topContainer */}
@@ -110,6 +114,8 @@ const Dashboard = () => {
         </section>
 
       </main>
+      :
+      <WowSuchEmpty/>
         }
 
       <Toaster position="top-center" />

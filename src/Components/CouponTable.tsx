@@ -1,85 +1,67 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { useMemo } from "react";
 import TableHOC from "./TableHOC";
+import { ICoupon } from "../types/coupon";
+import moment from "moment";
 
-interface CouponDataType {
-    code: string;
-    discount: number;
-    expiresAt: Date;
-    couponStatus:"expired"|"used"|"available"
-}
+const CouponTable = ({ data }: { data: ICoupon[] }) => {
 
-const couponData: CouponDataType[] = [
-    {
-        code: "NITESH1234",
-        discount: 100,
-        expiresAt: new Date('2025-12-31T23:59:59'),
-        couponStatus:"used"
-    },
-    {
-        code: "SUMMERSALE20",
-        discount: 20,
-        expiresAt: new Date('2025-06-30T23:59:59'),
-        couponStatus:"available"
-    },
-    {
-        code: "NEWYEAR2025",
-        discount: 50,
-        expiresAt: new Date('2025-01-01T23:59:59'),
-        couponStatus:"expired"
-    },
-    {
-        code: "FESTIVE10",
-        discount: 10,
-        expiresAt: new Date('2025-11-15T23:59:59'),
-        couponStatus:"available",
-    },
-    {
-        code: "BLACKFRIDAY2025",
-        discount: 75,
-        expiresAt: new Date('2025-11-27T23:59:59'),
-        couponStatus:"used"
-    },
-    {
-        code: "WINTERSALE30",
-        discount: 30,
-        expiresAt: new Date('2025-02-28T23:59:59'),
-        couponStatus:"available"
+    const getDaysLeft = (date: string) => {
+        return moment(date).diff(moment(), "days")+1;
     }
-];
 
+    const getColour = (daysLeft: number | string) => {
+        console.log(daysLeft,"daysLeft")
+        if (daysLeft as number < 3)
+            daysLeft = 0;
+        else if(daysLeft as number >10)
+            daysLeft = 10;
+        else 
+        daysLeft=8;
 
+        const colorSaturation = Number(daysLeft) / 10;
 
-const CouponTable = () => {
+        const red = Math.round((1 - colorSaturation) * 255);
+        const green = Math.round((colorSaturation) * 255);
+        const blue = Math.round((1-Math.abs(colorSaturation-0.5)*2)*100);
+       console.log(`rgb(${red},${green},${blue})`)
+        return `rgb(${red},${green},${blue})`;
 
-    const columns = useMemo<ColumnDef<CouponDataType,string>[]>(() => [
+    }
+
+    const columns = useMemo<ColumnDef<ICoupon, string>[]>(() => [
         {
-            accessorKey:'code',
-            header:'Coupon Code',
-            cell:(info)=>info.getValue()
+            accessorKey: 'code',
+            header: 'Coupon Code',
+            cell: (info) => info.getValue()
         },
         {
-            accessorKey:'discount',
-            header:'Discount',
-            cell:(info)=>info.getValue()
+            accessorKey: 'discountedAmount',
+            header: 'Discount',
+            cell: (info) => info.getValue()
         },
         {
-            accessorKey:'expiresAt',
-            header:'Expires At',
-            cell:(info)=>String(info.getValue())
+            accessorKey: 'maxRedemptionCount',
+            header: 'Redem Limit',
+            cell: (info) => (info.getValue())
         },
         {
-            accessorKey:'couponStatus',
-            header:'Status',
-            cell:(info)=>info.getValue()
+            accessorKey: 'availableRedemptionCount',
+            header: 'Available',
+            cell: (info) => info.getValue()
+        },
+        {
+            accessorKey: 'expiresAt',
+            header: 'Validity',
+            cell: (info) => <span className="p-2 rounded-lg font-semibold text-black" style={{backgroundColor:`${getColour(getDaysLeft(info.getValue()))}`}}>{getDaysLeft(info.getValue())} Days left </span>
         }
     ],
         []
     )
 
     return (
-    TableHOC(columns,couponData,"Coupons List",true)()
-  )
+        TableHOC(columns, data, "Coupons List", true)()
+    )
 }
 
 export default CouponTable

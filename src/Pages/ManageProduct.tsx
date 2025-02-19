@@ -11,6 +11,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useDeleteProduct } from "../hooks/useDeleteProduct";
 import ClipLoader from "react-spinners/ClipLoader";
 import { Toaster } from "react-hot-toast";
+import WowSuchEmpty from "../Components/WowSuchEmpty";
 
 const ManageProduct = () => {
 
@@ -41,6 +42,8 @@ const ManageProduct = () => {
             <Loader />
           </div>
           :
+          currentProduct 
+          ?
           <main className="p-4 bg-gray-200 min-h-screen w-screen flex flex-col gap-2 lg:flex-row justify-center items-center">
 
             <div className="bg-white flex flex-col rounded-lg shadow-lg shadow-gray-500 p-4 mt-5 max-w-sm min-h-fit lg:h-[520px] xl:h-[520px] lg:m-0 lg:p-[2rem]">
@@ -62,6 +65,8 @@ const ManageProduct = () => {
             <ProductForm product={currentProduct} id={id} />
 
           </main>
+          :
+          <WowSuchEmpty/>
       }
       <Toaster position="top-center"/>
     </div>

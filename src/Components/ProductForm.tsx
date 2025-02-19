@@ -96,7 +96,7 @@ const ProductForm = ({ closeForm, product,id }: {
                             <ErrorMessage name="stock" component="div" className="text-red-500 text-sm" />
 
                             <label htmlFor="price">Price</label>
-                            <Field id="price" name="price" placeholder="Enter Price" className="input-style" />
+                            <Field id="price" name="price" placeholder="Enter Price in USD" className="input-style" />
                             <ErrorMessage name="price" component="div" className="text-red-500 text-sm" />
 
                             <label htmlFor="photo">Photo</label>
