@@ -28,7 +28,7 @@ const Products = () => {
               <button className="btn-style " onClick={() => setIsFormOpen(true)} disabled={isPending}>Add Product <IoAddCircle className="text-2xl" /></button>
              { 
               isPending ? <Loader/>:
-             productsArray && productsArray.length>0 ? <ProductTable data={productsArray} /> : <div className="max-h-[70vh]"> <WowSuchEmpty/> </div>}
+             productsArray && productsArray?.length>0 ? <ProductTable data={productsArray} /> : <div className="max-h-[70vh]"> <WowSuchEmpty/> </div>}
             </div>
             {isFormOpen && <AddProductForm closeForm={() => setIsFormOpen(false)} />}
           </main>

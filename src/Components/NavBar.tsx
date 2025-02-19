@@ -63,10 +63,10 @@ const NavBar = () => {
             text: "Toss",
         },
         {
-            icon:BiStopwatch,
-            url:"/admin/stop-watch",
-            text:"StopWatch",
-       },
+            icon: BiStopwatch,
+            url: "/admin/stop-watch",
+            text: "StopWatch",
+        },
     ]
     return (
         <aside >
@@ -76,11 +76,8 @@ const NavBar = () => {
 
                 <h1 className="mt-4 text-2xl md:text-4xl">Logo</h1>
 
-               <NavItems navItem={dashboardItems} name="Dashboard"/>
-
-                {/* <NavItems navItem={chartItems} name="Charts"/> */}
-
-              <NavItems navItem={utilItems} name="Utils"/>
+                <NavItems navItem={dashboardItems} name="Dashboard" />
+                <NavItems navItem={utilItems} name="Utils" />
 
             </nav>
             {isOpen && <div className='min-h-screen w-screen fixed z-10 bg-black bg-opacity-50 backdrop-filter blur-sm' onClick={handleToggle}>

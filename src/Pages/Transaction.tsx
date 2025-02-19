@@ -16,7 +16,7 @@ const Transaction = () => {
         isPending ?
          <Loader /> 
          :
-         data?.allOrders ?
+         data?.allOrders && data?.allOrders.length>0 ?
           <main className="flex-[0.8] mx-auto my-10">
             <TransactionTable data={data.allOrders} />
           </main>
