@@ -2,6 +2,8 @@ import { lazy, Suspense } from "react";
 import { Navigate, Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import Loader from "./Components/Loader";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import Login from "./Pages/Login";
+import SignUp from "./Pages/SingUp";
 
 
 const Dashboard = lazy(() => import("./Pages/Dashboard"));
@@ -20,7 +22,9 @@ function App() {
       <Router>
         <Suspense fallback={<Loader />}>
           <Routes>
-            <Route path="/" element={<Navigate to="/admin/dashboard" />} />
+            <Route path="/" element={<Navigate to="/signUp" />} />
+            <Route path="/signUp" element={<SignUp />} />
+            <Route path="/login" element={<Login />} />
             <Route path="/admin/dashboard" element={<Dashboard />} />
             <Route path="/admin/products" element={<Products />} />
             <Route path="/admin/products/:id" element={<ManageProduct />} />

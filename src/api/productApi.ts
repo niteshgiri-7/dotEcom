@@ -1,7 +1,7 @@
 import { AxiosRequestConfig } from "axios";
 import { ProductFormData, ProductResponse } from "../types/product";
 import Axios from "./axiosInstance";
-import { appendFormData } from "../utils/appendFormData";
+import { appendProductFormData } from "../utils/appendFormData";
 
 export const getAllProducts = async (): Promise<ProductResponse> => {
     console.log("calling all products api")
@@ -21,7 +21,7 @@ export const addNewProduct = async (values: ProductFormData) => {
 
     let formData = new FormData();
     
-    formData=appendFormData(formData,values);
+    formData=appendProductFormData(formData,values);
     
     const config:AxiosRequestConfig={
         headers:{
@@ -35,7 +35,7 @@ export const addNewProduct = async (values: ProductFormData) => {
 export const editProduct = async({values,id}:{values:ProductFormData,id:string|number})=>{
 
     let formData = new FormData();
-    formData= appendFormData(formData,values);
+    formData= appendProductFormData(formData,values);
     console.log(values,"data")
     console.log(formData,"from edit")
     const config:AxiosRequestConfig={

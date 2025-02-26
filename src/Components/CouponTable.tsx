@@ -28,6 +28,11 @@ const CouponTable = ({ data }: { data: ICoupon[] }) => {
         return `rgb(${red},${green},${blue})`;
 
     }
+     
+    const isCouponExpired = (daysLeft:number):boolean=>{
+         if(daysLeft<1) return true;
+         else return false;
+    }
 
     const columns = useMemo<ColumnDef<ICoupon, string>[]>(() => [
         {
@@ -53,7 +58,7 @@ const CouponTable = ({ data }: { data: ICoupon[] }) => {
         {
             accessorKey: 'expiresAt',
             header: 'Validity',
-            cell: (info) => <span className="p-2 rounded-lg font-semibold text-black" style={{backgroundColor:`${getColour(getDaysLeft(info.getValue()))}`}}>{getDaysLeft(info.getValue())} Days left </span>
+            cell: (info) => <span className="p-2 rounded-lg font-semibold text-black" style={{backgroundColor:`${getColour(getDaysLeft(info.getValue()))}`}}>{isCouponExpired(getDaysLeft(info.getValue()))?"Expired":getDaysLeft(info.getValue())+"daysLeft"}</span>
         }
     ],
         []

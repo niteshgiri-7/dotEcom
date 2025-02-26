@@ -6,7 +6,7 @@ export const useErrorNotification = (isError:boolean,error:Error|null,descriptio
     useEffect(()=>{
          if(isError){
             toast.error(description as string);
-            console.log(error?.message,"hello")
+            console.log(error?.message)
             console.log(error)
          }
     },[isError,description,error]);

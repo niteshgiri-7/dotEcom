@@ -1,31 +1,13 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { IoClose } from "react-icons/io5";
-import * as Yup from "yup";
 import ClipLoader from "react-spinners/ClipLoader";
 import { useAddNewProduct } from "../hooks/useAddNewProduct";
-import { Product, ProductFormData } from "../types/product";
 import { useEditProduct } from "../hooks/useEditProduct";
 import { useErrorNotification } from "../hooks/useErrorNotification";
+import { Product, ProductFormData } from "../types/product";
+import { productFormSchema } from "../utils/formSchema";
 
 
-const productFormSchema = Yup.object().shape({
-    name: Yup.string()
-        .min(2, 'Too Short!')
-        .max(50, 'Too Long!')
-        .required('Required'),
-    price: Yup.number()
-        .min(2, 'Too Short!')
-        .max(9999, 'Too Long!')
-        .required('Required'),
-    stock: Yup.number()
-        .min(1, 'Too Low!')
-        .max(9999, 'Too High!')
-        .required('Required'),
-    category: Yup.string()
-        .min(2, 'Too Short!')
-        .max(50, 'Too Long!')
-        .required('Required'),
-});
 
 //closeForm is being used to close the modal while adding new product 
 //product is being used to populate the product form when clicking manage(ofc from product table(Product page))
