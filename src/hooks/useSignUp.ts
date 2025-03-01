@@ -42,7 +42,6 @@ export const useSignUp = () => {
       );
 
       user = signUp.user;
-      const token = await user.getIdToken(true);
 
       let formData = new FormData();
       //user is being passed additionally to append the uid of user in the form(user.uid)
@@ -58,10 +57,13 @@ export const useSignUp = () => {
         }
       );
       if (status === 201) {
-        const { expirationTime } = await user.getIdTokenResult();
-
+        const token = await user.getIdToken(true);
         localStorage.setItem("token", token);
+
         localStorage.setItem("refreshToken", user.refreshToken);
+        
+        const {expirationTime} = await user.getIdTokenResult();
+
         localStorage.setItem("tokenExpiryTime", expirationTime);
       } else {
         console.log("Backend error", data.message);
@@ -69,7 +71,7 @@ export const useSignUp = () => {
       }
 
       if (data.user.role === "admin") navigate("/admin/dashboard");
-      else console.log("wait for user");
+      else navigate("/home")
 
       setIsLoading(false);
     } catch (error) {

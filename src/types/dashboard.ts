@@ -45,4 +45,5 @@ export interface DashboardStatsType {
 
 export interface DashboardData {
   stats: DashboardStatsType;
+  message:string;
 }

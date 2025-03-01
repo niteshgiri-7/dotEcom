@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query"
-import { getAdminDashBoardStats } from "../api/dashboardApi"
+import { getAdminDashBoardStats } from "../api/Admin/dashboardApi"
 import { DashboardData } from "../types/dashboard"
 
 export const useDashboard = ()=>{

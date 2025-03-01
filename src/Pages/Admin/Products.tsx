@@ -1,21 +1,21 @@
 import { useState } from "react";
 import { IoAddCircle } from "react-icons/io5";
-import Loader from "../Components/Loader";
-import NavBar from "../Components/NavBar";
-import AddProductForm from "../Components/ProductForm";
-import ProductTable from "../Components/ProductTable";
-import { useErrorNotification } from "../hooks/useErrorNotification";
-import { useProducts } from "../hooks/useProduct";
+import Loader from "../../Components/Loader";
+import NavBar from "../../Components/NavBar";
+import AddProductForm from "../../Components/ProductForm";
+import ProductTable from "../../Components/ProductTable";
+import WowSuchEmpty from "../../Components/WowSuchEmpty";
+import { useErrorNotification } from "../../hooks/useErrorNotification";
+import { useProducts } from "../../hooks/useProduct";
 import { Toaster } from "react-hot-toast";
-import WowSuchEmpty from "../Components/WowSuchEmpty";
 
 
 
 const Products = () => {
   const [isFormOpen, setIsFormOpen] = useState<boolean>(false);
-  const { productsArray, isError, error, isPending } = useProducts();
-  useErrorNotification(isError, error, error?.message);
-
+  const { productsArray, isError, error, isPending} = useProducts();
+  useErrorNotification(isError, error,error?.message);
+  console.log("from page",productsArray)
 
   return (
     <div className="flex min-h-screen  bg-gray-100 relative ">

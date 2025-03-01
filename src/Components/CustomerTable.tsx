@@ -1,7 +1,6 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { useMemo } from "react";
 import { CustomerData } from "../types/customer";
-import { BASEURL } from "../utils/constants";
 import TableHOC from "./TableHOC";
 
 
@@ -13,9 +12,9 @@ const CustomerTable = ({data}:{data:CustomerData[]}) => {
    
     const columns = useMemo<ColumnDef<CustomerData, string>[]>(() => [
         {
-            accessorKey: 'photo',
+            accessorKey: 'photo.secure_url',
             header: 'Photo',
-            cell: (info) => <img src={`${BASEURL}${info.getValue()}`} className="max-h-[50px] md:max-h-[70px]  md:min-w-[70px] mx-auto rounded-full" alt="customer-photo"/>,
+            cell: (info) => <img src={`${info.getValue()}`} className="max-h-[50px] md:max-h-[70px]  md:min-w-[70px] mx-auto rounded-full" alt="customer-photo"/>,
             enableSorting: false,
         },
         {

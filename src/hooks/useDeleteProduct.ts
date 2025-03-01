@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-import { deleteProduct } from "../api/productApi";
+import { deleteProduct } from "../api/Admin/adminProductApi";
 import { ProductResponse } from "../types/product";
 
 export const useDeleteProduct = (id:number|string)=>{

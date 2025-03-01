@@ -2,7 +2,6 @@ import { ColumnDef } from "@tanstack/react-table";
 import { useCallback, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { Product } from "../types/product";
-import { BASEURL } from "../utils/constants";
 import TableHOC from "./TableHOC";
 
 
@@ -20,9 +19,9 @@ navigate(`/admin/products/${id}`);
 
 const columns = useMemo<ColumnDef<Product,string>[]>(()=>[
   {
-    accessorKey:'photo',
+    accessorKey:'photo.secure_url',
     header:'Photo',
-    cell:(info)=><img className="max-h-[50px] md:max-h-[70px]  mx-auto rounded-lg" src={`${BASEURL}${info.getValue()}`}/>,
+    cell:(info)=><img className="max-h-[50px] md:max-h-[70px]  mx-auto rounded-lg" src={`${info.getValue()}`}/>,
     enableSorting:false,
   },
   {

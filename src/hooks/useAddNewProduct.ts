@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query"
-import { addNewProduct } from "../api/productApi"
+import { addNewProduct } from "../api/Admin/adminProductApi"
 import toast from "react-hot-toast"
 import { ProductResponse } from "../types/product";
 import { AxiosError } from "axios";

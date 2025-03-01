@@ -8,12 +8,14 @@ import { useLogin } from "../hooks/useLogin";
 import { LoginPageImage } from "../utils/constants";
 import { loginFormValidationSchema } from "../utils/formSchema";
 import { LoginFormInitialValues } from "../utils/initialFormValues";
+import { Link } from "react-router-dom";
+import { ChangeEvent } from "react";
 
 
 
 const Login = () => {
 
-    const { handleLogin, isLoading, error } = useLogin();
+    const { handleLogin, isLoading, error, clearError } = useLogin();
     useErrorNotification(error.isError, error, error.message);
 
     return (
@@ -35,7 +37,7 @@ const Login = () => {
                 </div>
             </div>
 
-       
+
             <div className="w-full lg:w-1/2 flex items-center justify-center bg-gradient-to-br from-blue-50 to-white p-8">
                 <div className="w-full max-w-md">
                     <div className="text-center mb-8">
@@ -51,79 +53,89 @@ const Login = () => {
                             handleLogin(values);
                         }}
                     >
+                        {({ setFieldValue }) => (
 
-                        <Form className="space-y-6">
-                            <div>
-                                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                                    Email address
-                                </label>
-                                <div className="relative">
-                                    <HiMail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
-                                    <Field
-                                        id="email"
-                                        name="email"
-                                        type="email"
-                                        className="pl-10 w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white"
-                                        placeholder="Enter your email"
-                                        required
-                                         />
-                                </div>
-                                <ErrorMessage name="email" component="div" className="text-sm text-red-500" />
-                            </div>
 
-                            <div>
-                                <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
-                                    Password
-                                </label>
-                                <div className="relative">
-                                    <BiLock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
-                                    <Field
-                                        id="password"
-                                        type="password"
-                                        name="password"
-                                        autoComplete="current-pasword"
-                                        className="pl-10 w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white"
-                                        placeholder="Enter your password"
-                                        required
-                                    />
-                                </div>
-                                <ErrorMessage name="password" component="div" className="text-sm text-red-500" />
-                            <p className="text-sm text-red-600 mt-2">{error.message}</p>
-                            </div>
-                            <div className="flex items-center justify-between">
-                                <div className="flex items-center">
-                                    <input
-                                        id="remember-me"
-                                        type="checkbox"
-                                        className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-                                    />
-                                    <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-700">
-                                        Remember me
+                            <Form className="space-y-6">
+                                <div>
+                                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                                        Email address
                                     </label>
+                                    <div className="relative">
+                                        <HiMail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
+                                        <Field
+                                            id="email"
+                                            name="email"
+                                            type="email"
+                                            className="pl-10 w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white"
+                                            placeholder="Enter your email"
+                                            required
+                                            onChange={(e:ChangeEvent<HTMLInputElement>) => { setFieldValue("email", e.target.value); clearError(); }}
+                                        />
+                                    </div>
+                                    <ErrorMessage name="email" component="div" className="text-sm text-red-500" />
                                 </div>
-                                <a href="#" className="text-sm font-medium text-blue-600 hover:text-blue-500">
-                                    Forgot password?
-                                </a>
-                            </div>
 
-                            <button
-                                type="submit"
-                                className="btn-style w-full"
-                                disabled={isLoading}
-                            >
-                                {isLoading ? <ClipLoader size={30}/> :
-                                <>
-                                <BiLogIn className="w-5 h-5 " />
-                                Login
-                                </>
-                                }
-                            </button>
-                        </Form>
+                                <div>
+                                    <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
+                                        Password
+                                    </label>
+                                    <div className="relative">
+                                        <BiLock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
+                                        <Field
+                                            id="password"
+                                            type="password"
+                                            name="password"
+                                            autoComplete="current-pasword"
+                                            className="pl-10 w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white"
+                                            placeholder="Enter your password"
+                                            required
+                                            onChange={(e:ChangeEvent<HTMLInputElement>)=>{setFieldValue("password",e.target.value); clearError();}}
+                                        />
+                                    </div>
+                                    <ErrorMessage name="password" component="div" className="text-sm text-red-500" />
+                                    <p className="text-sm text-red-600 mt-2">{error.message}</p>
+                                </div>
+                                <div className="flex items-center justify-between">
+                                    <div className="flex items-center">
+                                        <input
+                                            id="remember-me"
+                                            type="checkbox"
+                                            className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                                        />
+                                        <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-700">
+                                            Remember me
+                                        </label>
+                                    </div>
+                                    <a href="#" className="text-sm font-medium text-blue-600 hover:text-blue-500">
+                                        Forgot password?
+                                    </a>
+                                </div>
 
+                                <button
+                                    type="submit"
+                                    className="btn-style w-full"
+                                    disabled={isLoading}
+                                >
+                                    {isLoading ? <ClipLoader size={30} /> :
+                                        <>
+                                            <BiLogIn className="w-5 h-5 " />
+                                            Login
+                                        </>
+                                    }
+                                </button>
+                            </Form>
+                        )}
                     </Formik>
+                    <p className="text-center mt-4">
+                        Don't have an account?
+                        <Link to="/signUp">
+                            <span className="font-semibold text-blue-600">{" "}Create Account</span>
+                        </Link>
+                    </p>
                 </div>
             </div>
-            <Toaster/>
+            <Toaster />
         </div>
     );
 }

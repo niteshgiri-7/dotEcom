@@ -8,14 +8,15 @@ import { useSignUp } from '../hooks/useSignUp';
 import { LoginPageImage } from '../utils/constants';
 import { signUpFormValidationSchema } from '../utils/formSchema';
 import { signUpFromInitialValues } from '../utils/initialFormValues';
+import { Link } from 'react-router-dom';
 
 
 const SignUp = () => {
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const {handleSignUp,isLoading,error} = useSignUp();
-  useErrorNotification(error.isError,error,error.message);
+  const { handleSignUp, isLoading, error } = useSignUp();
+  useErrorNotification(error.isError, error, error.message);
 
   return (
     <div className="min-h-screen flex">
@@ -47,12 +48,12 @@ const SignUp = () => {
           <Formik
             initialValues={signUpFromInitialValues}
             validationSchema={signUpFormValidationSchema}
-            onSubmit={(values)=>{
+            onSubmit={(values) => {
               handleSignUp(values);
             }}
           >
             {({ setFieldValue }) => (
-              <Form className="space-y-6">
+              <Form className="space-y-2">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     <span className="flex items-center">
@@ -188,14 +189,19 @@ const SignUp = () => {
                   disabled={isLoading}
                   className="btn-style w-full"
                 >
-                  {isLoading ? <ClipLoader size={30}/> : 'Create Account'}
+                  {isLoading ? <ClipLoader size={30} /> : 'Create Account'}
                 </button>
               </Form>
             )}
           </Formik>
+          <p className='text-center mt-2'>Already have an account?{" "}
+            <Link to="/login">
+              <span className='text-blue-600 font-semibold cursor-pointer'>Login</span>
+            </Link>
+          </p>
         </div>
       </div>
-      <Toaster position='top-center'/>
+      <Toaster position='top-center' />
     </div>
   );
 };

@@ -4,16 +4,19 @@ import Loader from "./Components/Loader";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Login from "./Pages/Login";
 import SignUp from "./Pages/SingUp";
+import Home from "./Pages/User/Home";
+import UserLayout from "./Pages/User/UserLayout";
+import CartPage from "./Pages/User/Cart";
 
 
-const Dashboard = lazy(() => import("./Pages/Dashboard"));
-const Products = lazy(() => import("./Pages/Products"));
-const ManageProduct = lazy(() => import("./Pages/ManageProduct"))
-const Transaction = lazy(() => import("./Pages/Transaction"));
-const Customers = lazy(() => import("./Pages/Customers"));
-const Coupon = lazy(() => import("./Pages/Coupon"));
-const Toss = lazy(() => import("./Pages/Toss"));
-const StopWatch = lazy(() => import("./Pages/StopWatch"));
+const Dashboard = lazy(() => import("./Pages/Admin/Dashboard"));
+const Products = lazy(() => import("./Pages/Admin/Products"));
+const ManageProduct = lazy(() => import("./Pages/Admin/ManageProduct"))
+const Transaction = lazy(() => import("./Pages/Admin/Transaction"));
+const Customers = lazy(() => import("./Pages/Admin/Customers"));
+const Coupon = lazy(() => import("./Pages/Admin/Coupon"));
+const Toss = lazy(() => import("./Pages/Admin/Toss"));
+const StopWatch = lazy(() => import("./Pages/Admin/StopWatch"));
 
 function App() {
   const queryClient = new QueryClient();
@@ -22,9 +25,10 @@ function App() {
       <Router>
         <Suspense fallback={<Loader />}>
           <Routes>
-            <Route path="/" element={<Navigate to="/signUp" />} />
+            <Route path="/" element={<Navigate to="/login" />} />
             <Route path="/signUp" element={<SignUp />} />
             <Route path="/login" element={<Login />} />
+
             <Route path="/admin/dashboard" element={<Dashboard />} />
             <Route path="/admin/products" element={<Products />} />
             <Route path="/admin/products/:id" element={<ManageProduct />} />
@@ -33,6 +37,12 @@ function App() {
             <Route path="/admin/coupon" element={<Coupon />} />
             <Route path="/admin/toss" element={<Toss />} />
             <Route path="/admin/stop-watch" element={<StopWatch />} />
+
+            <Route path="/" element={<UserLayout />}>
+              <Route path="/home" element={<Home />} />
+              <Route path="/cart" element={<CartPage />} />
+            </Route>
+
           </Routes>
         </Suspense>
       </Router>

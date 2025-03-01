@@ -27,7 +27,7 @@ export const appendSignUpFromData = (
   formData.append("DOB", data.dob);
   formData.append("gender", data.gender);
   formData.append("photo", data.photo);
-  formData.append("role","admin")
+  formData.append("role","user")
  
   return formData;
 };

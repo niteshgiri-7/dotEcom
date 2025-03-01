@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import NavBar from "../Components/NavBar";
+import NavBar from "../../Components/NavBar";
 
 const StopWatch = () => {
   const [isClockRunning, setIsClockRunning] = useState(false);
@@ -56,7 +56,7 @@ const StopWatch = () => {
       <NavBar />
       <main className="flex-1 flex justify-center items-center relative">
         <h1 className="mt-10 mx-10 text-3xl font-bold absolute top-0 left-0">Stop Watch</h1>
-        <div className="w-[20rem] h-[20rem] md:w-[30rem] bg-white rounded-lg shadow-lg shadow-gray-400">
+        <div className="w-[20rem] h-[25rem] md:w-[30rem] bg-white rounded-lg shadow-lg shadow-gray-400">
           <div className="flex gap-3 h-[80%]">
             <div className="w-[30%] flex justify-center items-center">
               <strong className="w-[90%] text-center text-6xl">{watch.hr}</strong>
@@ -71,11 +71,11 @@ const StopWatch = () => {
             </div>
           </div>
           <hr className="h-1 bg-gray-200"></hr>
-          <div className="flex justify-center gap-4 mt-2">
+          <div className="flex justify-center gap-4 my-5 h-10">
             <button className="bg-red-600 px-4 py-2 rounded-lg text-white font-bold hover:bg-red-400" onClick={resetClock}>
               Reset
             </button>
-            <button className="btn-style" onClick={isClockRunning ? stopClock : startClock}>
+            <button className="bg-blue-600 px-4 py-2 rounded-lg text-white font-bold hover:bg-blue-400" onClick={isClockRunning ? stopClock : startClock}>
               {isClockRunning ? "Stop" : "Start"}
             </button>
           </div>

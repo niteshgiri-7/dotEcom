@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getAllCustomers } from "../api/customerApi";
+import { getAllCustomers } from "../api/Admin/customerApi";
 
 export const useCustomers = () => {
   return useQuery({

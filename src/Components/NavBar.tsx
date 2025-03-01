@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { IconType } from "react-icons";
 import { AiFillProduct } from "react-icons/ai";
-import { BiCoin, BiStopwatch } from "react-icons/bi";
+import { BiCoin, BiStopwatch, BiStore } from "react-icons/bi";
 import { HiMenu } from "react-icons/hi";
 import { IoClose } from "react-icons/io5";
 import { PiFileDashedBold } from "react-icons/pi";
@@ -16,7 +16,6 @@ export interface NavItemsType {
     icon: IconType;
 }
 
-//TODO: show toast after tossing the coin
 
 const NavBar = () => {
 
@@ -74,7 +73,9 @@ const NavBar = () => {
             </button>
             <nav className={`fixed md:static bg-white h-screen w-[14rem] md:w-fit lg:min-w-[20vw] ${!isOpen ? "-translate-x-full" : "translate-x-0"} transition-transform duration-300 ease-in-out md:translate-x-0 z-20 p-2 md:p-4 font-bold text-lg lg:text-xl`}>
 
-                <h1 className="mt-4 text-2xl md:text-4xl">Logo</h1>
+               <div className="w-1/3 flex md:justify-end">
+                <BiStore className="mt-4 md:mt-0 text-5xl md:text-6xl text-blue-800"/>
+               </div>
 
                 <NavItems navItem={dashboardItems} name="Dashboard" />
                 <NavItems navItem={utilItems} name="Utils" />

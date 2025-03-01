@@ -24,7 +24,12 @@ export const useLogin = () => {
     message: "",
   });
 
+  const clearError=()=>{
+    setError((prev)=>({...prev,isError:false,name:"",message:""}))
+  }
+
   const handleLogin = async (userData: IuserCredentials) => {
+    let user =null;
     try {
 
       const { email, password } = userData;
@@ -35,15 +40,16 @@ export const useLogin = () => {
         password
       );
 
-      const user = login.user; 
+       user = login.user; 
       const token = await user.getIdToken(true);
-      const {expirationTime} = await user.getIdTokenResult();
+      const {expirationTime,claims} = await user.getIdTokenResult();
       
      localStorage.setItem("token",token);
      localStorage.setItem("refreshToken",user.refreshToken);
      localStorage.setItem("tokenExpiryTime",expirationTime);
     
-      navigate("/admin-dashboard")
+      if(claims.role==="admin") navigate("/admin/dashboard");
+      else navigate("/home");
      
       setIsLoading((prev) => !prev);
     } catch (error) {
@@ -64,5 +70,5 @@ export const useLogin = () => {
     }
   };
 
-  return { isLoading, error,setError, handleLogin };
+  return { isLoading, error,setError, handleLogin , clearError};
 };

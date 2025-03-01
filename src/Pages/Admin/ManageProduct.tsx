@@ -1,17 +1,16 @@
+import { useQueryClient } from "@tanstack/react-query";
+import { Toaster } from "react-hot-toast";
 import { BiSolidLeftArrow } from "react-icons/bi";
 import { Link, useParams } from "react-router-dom";
-import Loader from "../Components/Loader";
-import NavBar from "../Components/NavBar";
-import ProductForm from "../Components/ProductForm";
-import { useErrorNotification } from "../hooks/useErrorNotification";
-import { useProductDetails } from "../hooks/useProduct";
-import { Product, ProductResponse } from "../types/product";
-import { BASEURL } from "../utils/constants";
-import { useQueryClient } from "@tanstack/react-query";
-import { useDeleteProduct } from "../hooks/useDeleteProduct";
 import ClipLoader from "react-spinners/ClipLoader";
-import { Toaster } from "react-hot-toast";
-import WowSuchEmpty from "../Components/WowSuchEmpty";
+import Loader from "../../Components/Loader";
+import NavBar from "../../Components/NavBar";
+import ProductForm from "../../Components/ProductForm";
+import WowSuchEmpty from "../../Components/WowSuchEmpty";
+import { useDeleteProduct } from "../../hooks/useDeleteProduct";
+import { useErrorNotification } from "../../hooks/useErrorNotification";
+import { useProductDetails } from "../../hooks/useProduct";
+import { Product, ProductResponse } from "../../types/product";
 
 const ManageProduct = () => {
 
@@ -53,7 +52,7 @@ const ManageProduct = () => {
               </Link>
 
               <h1 className="text-end text-green-500 mr-5"><strong>{currentProduct?.stock} Available</strong></h1>
-              <img className="rounded-lg max-w-[90%] min-h-[50%] mx-auto" src={BASEURL + currentProduct?.photo} alt="product-photo" />
+              <img className="rounded-lg max-w-[90%] min-h-[50%] mx-auto" src={currentProduct.photo.secure_url} alt="product-photo" />
               <div className="lg:flex lg:flex-col flex-1 justify-end">
                 <p className="text-center text-2xl ">{currentProduct?.name}</p>
                 <p className="text-center text-4xl">$ {currentProduct?.price}</p>

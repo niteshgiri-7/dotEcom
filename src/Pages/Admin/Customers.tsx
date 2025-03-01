@@ -1,9 +1,9 @@
-import CustomerTable from "../Components/CustomerTable"
-import Loader from "../Components/Loader";
-import NavBar from "../Components/NavBar"
-import WowSuchEmpty from "../Components/WowSuchEmpty";
-import { useCustomers } from "../hooks/useCustomer"
-import { useErrorNotification } from "../hooks/useErrorNotification";
+import CustomerTable from "../../Components/CustomerTable"
+import Loader from "../../Components/Loader";
+import NavBar from "../../Components/NavBar"
+import WowSuchEmpty from "../../Components/WowSuchEmpty";
+import { useCustomers } from "../../hooks/useCustomer"
+import { useErrorNotification } from "../../hooks/useErrorNotification";
 
 const Customers = () => {
 

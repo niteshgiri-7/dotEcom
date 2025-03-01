@@ -1,9 +1,9 @@
-import Loader from "../Components/Loader";
-import NavBar from "../Components/NavBar"
-import TransactionTable from "../Components/TransactionTable"
-import WowSuchEmpty from "../Components/WowSuchEmpty";
-import { useErrorNotification } from "../hooks/useErrorNotification";
-import { useTransaction } from "../hooks/useTransaction";
+import Loader from "../../Components/Loader";
+import NavBar from "../../Components/NavBar"
+import TransactionTable from "../../Components/TransactionTable"
+import WowSuchEmpty from "../../Components/WowSuchEmpty";
+import { useErrorNotification } from "../../hooks/useErrorNotification";
+import { useTransaction } from "../../hooks/useTransaction";
 
 const Transaction = () => {
   const { data, error, isError, isPending } = useTransaction();

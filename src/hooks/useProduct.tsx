@@ -1,14 +1,14 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { getAllProducts, getProductDetails } from "../api/productApi";
+import { getAllProducts, getProductDetails } from "../api/product";
 import { Product, ProductResponse } from "../types/product";
 
 export const useProducts = ()=>{
-    const {data:response,isError,error,isPending} = useQuery<ProductResponse,Error>({
+    const {data,isError,error,isPending} = useQuery({
         queryKey:["allProducts"],
         queryFn:getAllProducts,
     });
-    const productsArray:Product[]= response?.Products as Product[];
-
+    console.log(data)
+    const productsArray:Product[]= data?.Products as Product[]  ;
     return {productsArray,isError,error,isPending};
 };
 

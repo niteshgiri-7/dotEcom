@@ -36,17 +36,30 @@ export const signUpFormValidationSchema = Yup.object().shape({
     .required("Gender is required"),
 });
 
-export const loginFormValidationSchema = Yup.object().shape({
-  email: Yup.string().email("Invalid email").required("Required"),
+
+//learnt about xss attacks, and yeah! validate gardimnata,below is the r.expression to test inputs
+
+const xssRegex = /(<([^>]+)>|javascript:|on\w+=)/i; // Matches <script>, <img>, event handlers, etc.
+
+export const loginFormValidationSchema= Yup.object().shape({
+  email: Yup.string()
+    .email("Invalid email")
+    .required("Required")
+    .test('xss-check', 'Invalid input detected', value => {
+      if (!value) return true;
+      return !xssRegex.test(value); 
+    }),
+
   password: Yup.string()
-    .min(6, "must be atleast 6 characters long")
+    .min(6, "Must be at least 6 characters long")
     .max(20, "Too long")
-    .matches(/[a-z]/, "Must contain at least one lowercase letter")
-    .matches(/[A-Z]/, "Must contain at least one uppercase letter")
-    .matches(/[0-9]/, "Must contain at least one number")
-    .matches(/[\W_]/, "Must contain at least one special character")
+    .test('xss-check', 'Invalid input detected', value => {
+      if (!value) return true;
+      return !xssRegex.test(value);
+    })
     .required("Required"),
 });
+
 
 export const productFormSchema = Yup.object().shape({
   name: Yup.string()

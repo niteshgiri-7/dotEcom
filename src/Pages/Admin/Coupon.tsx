@@ -4,14 +4,14 @@ import toast, { Toaster } from "react-hot-toast";
 import { FaCopy } from "react-icons/fa";
 import ClipLoader from "react-spinners/ClipLoader";
 import * as Yup from "yup";
-import CouponTable from "../Components/CouponTable";
-import Loader from "../Components/Loader";
-import NavBar from "../Components/NavBar";
-import { useCoupon, useCreateNewCoupon } from "../hooks/useCoupon";
-import { useErrorNotification } from "../hooks/useErrorNotification";
-import { ICoupon } from "../types/coupon";
-import { generateCoupon } from "../utils/generateCoupon";
-import WowSuchEmpty from "../Components/WowSuchEmpty";
+import CouponTable from "../../Components/CouponTable";
+import Loader from "../../Components/Loader";
+import NavBar from "../../Components/NavBar";
+import { useCoupon, useCreateNewCoupon } from "../../hooks/useCoupon";
+import { useErrorNotification } from "../../hooks/useErrorNotification";
+import { ICoupon } from "../../types/coupon";
+import { generateCoupon } from "../../utils/generateCoupon";
+import WowSuchEmpty from "../../Components/WowSuchEmpty";
 
 export interface CouponFormInputType {
     inputString: string;
