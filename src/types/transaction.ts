@@ -3,7 +3,7 @@
 export interface ShippingInfo{
     state:string;
     city:string;
-    pinCode:string;
+    pinCode:number;
     country:string;
 }
 

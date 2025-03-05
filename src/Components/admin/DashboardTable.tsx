@@ -1,7 +1,8 @@
 import { ColumnDef } from '@tanstack/react-table';
 import { memo, useMemo } from 'react';
+import { TransactionType } from '../../types/dashboard';
 import TableHOC from './TableHOC';
-import { TransactionType } from '../types/dashboard';
+
 
 
 

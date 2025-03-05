@@ -65,13 +65,16 @@ export const useSignUp = () => {
         const {expirationTime} = await user.getIdTokenResult();
 
         localStorage.setItem("tokenExpiryTime", expirationTime);
+
+
+      if (data.user.role === "admin") navigate("/admin/dashboard");
+      else navigate("/home")
+
       } else {
         console.log("Backend error", data.message);
         throw new Error(data.message);
       }
 
-      if (data.user.role === "admin") navigate("/admin/dashboard");
-      else navigate("/home")
 
       setIsLoading(false);
     } catch (error) {

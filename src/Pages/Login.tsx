@@ -16,7 +16,7 @@ import { ChangeEvent } from "react";
 const Login = () => {
 
     const { handleLogin, isLoading, error, clearError } = useLogin();
-    useErrorNotification(error.isError, error, error.message);
+    useErrorNotification(error.isError, error);
 
     return (
         <div className="min-h-screen flex">

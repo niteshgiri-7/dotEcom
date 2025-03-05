@@ -1,14 +1,14 @@
-import CustomerTable from "../../Components/CustomerTable"
+import CustomerTable from "../../Components/admin/CustomerTable"
 import Loader from "../../Components/Loader";
-import NavBar from "../../Components/NavBar"
+import NavBar from "../../Components/admin/NavBar"
 import WowSuchEmpty from "../../Components/WowSuchEmpty";
-import { useCustomers } from "../../hooks/useCustomer"
+import { useCustomers } from "../../hooks/admin/useCustomer";
 import { useErrorNotification } from "../../hooks/useErrorNotification";
 
 const Customers = () => {
 
   const { data, isPending, isError, error } = useCustomers();
-  useErrorNotification(isError, error, error?.message)
+  useErrorNotification(isError, error)
 
   return (
     <div className="flex bg-gray-200 min-h-screen">

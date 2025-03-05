@@ -16,7 +16,7 @@ const SignUp = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const { handleSignUp, isLoading, error } = useSignUp();
-  useErrorNotification(error.isError, error, error.message);
+  useErrorNotification(error.isError, error);
 
   return (
     <div className="min-h-screen flex">

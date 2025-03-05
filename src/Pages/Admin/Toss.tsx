@@ -1,5 +1,5 @@
 import { useState } from "react";
-import NavBar from "../../Components/NavBar";
+import NavBar from "../../Components/admin/NavBar";
 
 
 const Toss = () => {

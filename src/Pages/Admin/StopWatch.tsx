@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import NavBar from "../../Components/NavBar";
+import NavBar from "../../Components/admin/NavBar";
 
 const StopWatch = () => {
   const [isClockRunning, setIsClockRunning] = useState(false);

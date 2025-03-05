@@ -1,9 +1,10 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { editProduct } from "../api/Admin/adminProductApi";
-import { Product, ProductResponse } from "../types/product";
+
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { AxiosError } from "axios";
+import { editProduct } from "../../api/Admin/adminProductApi";
+import { Product, ProductResponse } from "../../types/product";
 
 export const useEditProduct = (id:string) => {
     const navigate = useNavigate();

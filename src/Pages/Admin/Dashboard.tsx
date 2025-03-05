@@ -3,17 +3,17 @@ import { memo, useState } from "react";
 import { Toaster } from "react-hot-toast";
 import { BiMaleFemale, BiSearch } from "react-icons/bi";
 import { RiNotification2Line, RiUser2Line } from "react-icons/ri";
-import BarChart from "../../Components/BarChart";
-import DashboardTable from "../../Components/DashboardTable";
-import DoughnutChart from "../../Components/DoughnutChart";
-import NavBar from "../../Components/NavBar";
-import OverviewCard from "../../Components/OverviewCard";
+import BarChart from "../../Components/admin/BarChart";
+import DashboardTable from "../../Components/admin/DashboardTable";
+import DoughnutChart from "../../Components/admin/DoughnutChart";
+import NavBar from "../../Components/admin/NavBar";
+import OverviewCard from "../../Components/admin/OverviewCard";
 import WowSuchEmpty from "../../Components/WowSuchEmpty";
-import { useDashboard } from "../../hooks/useDashboard";
 import { useErrorNotification } from "../../hooks/useErrorNotification";
 import { useLogOut } from "../../hooks/useLogOut";
 import { InventoryDataType } from "../../types/dashboard";
 import Loader from "../../Components/Loader";
+import { useDashboard } from "../../hooks/admin/useDashboard";
 
 
 
@@ -22,7 +22,7 @@ const Dashboard = () => {
   const { dashboardData, isError, error, isPending } = useDashboard();
   const {handleLogOut}=useLogOut();
 
-  useErrorNotification(isError, error, dashboardData?.message || "Something went Wrong! Please refresh the page");
+  useErrorNotification(isError, error);
 
   const handleShowLogOut = () => {
     setShowLogOut(prev => !prev);

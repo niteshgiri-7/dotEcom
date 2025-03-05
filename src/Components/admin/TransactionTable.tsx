@@ -1,7 +1,8 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { useMemo } from "react";
+import { OrderedItem, Transaction } from "../../types/transaction";
 import TableHOC from "./TableHOC";
-import { OrderedItem, Transaction } from "../types/transaction";
+
 
 
 const TransactionTable = ({data}:{data:Transaction[]})=>{

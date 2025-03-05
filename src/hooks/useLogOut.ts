@@ -6,8 +6,10 @@ export const useLogOut = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("tokenExpiryTime");
     localStorage.removeItem("refreshToken");
-
-    navigate("/login");
+    localStorage.removeItem("pidx");
+    localStorage.removeItem("cartItems");
+    localStorage.removeItem("purchaseId");
+    navigate("/login",{replace:true});
   };
 
   return {handleLogOut};

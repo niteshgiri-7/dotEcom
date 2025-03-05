@@ -1,6 +1,7 @@
 import { BiTrendingDown, BiTrendingUp } from 'react-icons/bi';
-import { OverViewCountType } from '../types/dashboard';
+
 import { memo } from 'react';
+import { OverViewCountType } from '../../types/dashboard';
 
 
 const OverviewCard = memo(({ name, count, rate }: OverViewCountType) => {

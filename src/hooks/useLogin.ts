@@ -48,7 +48,7 @@ export const useLogin = () => {
      localStorage.setItem("refreshToken",user.refreshToken);
      localStorage.setItem("tokenExpiryTime",expirationTime);
     
-      if(claims.role==="admin") navigate("/admin/dashboard");
+      if(claims.role==="admin" && token) navigate("/admin/dashboard");
       else navigate("/home");
      
       setIsLoading((prev) => !prev);

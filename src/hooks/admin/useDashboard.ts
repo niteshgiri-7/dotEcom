@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query"
-import { getAdminDashBoardStats } from "../api/Admin/dashboardApi"
-import { DashboardData } from "../types/dashboard"
+import { DashboardData } from "../../types/dashboard";
+import { getAdminDashBoardStats } from "../../api/Admin/dashboardApi";
+
 
 export const useDashboard = ()=>{
     const {data:dashboardData,isError,error,isPending} = useQuery<DashboardData,Error>({

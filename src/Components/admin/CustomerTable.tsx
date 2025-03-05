@@ -1,6 +1,6 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { useMemo } from "react";
-import { CustomerData } from "../types/customer";
+import { CustomerData } from "../../types/customer";
 import TableHOC from "./TableHOC";
 
 

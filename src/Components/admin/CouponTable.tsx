@@ -1,8 +1,9 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { useMemo } from "react";
-import TableHOC from "./TableHOC";
-import { ICoupon } from "../types/coupon";
+
 import moment from "moment";
+import { ICoupon } from "../../types/coupon";
+import TableHOC from "./TableHOC";
 
 const CouponTable = ({ data }: { data: ICoupon[] }) => {
 

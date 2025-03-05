@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { IoAddCircle } from "react-icons/io5";
 import Loader from "../../Components/Loader";
-import NavBar from "../../Components/NavBar";
-import AddProductForm from "../../Components/ProductForm";
-import ProductTable from "../../Components/ProductTable";
+import NavBar from "../../Components/admin/NavBar";
+import AddProductForm from "../../Components/admin/ProductForm";
+import ProductTable from "../../Components/admin/ProductTable";
 import WowSuchEmpty from "../../Components/WowSuchEmpty";
 import { useErrorNotification } from "../../hooks/useErrorNotification";
 import { useProducts } from "../../hooks/useProduct";
@@ -14,7 +14,7 @@ import { Toaster } from "react-hot-toast";
 const Products = () => {
   const [isFormOpen, setIsFormOpen] = useState<boolean>(false);
   const { productsArray, isError, error, isPending} = useProducts();
-  useErrorNotification(isError, error,error?.message);
+  useErrorNotification(isError, error);
   console.log("from page",productsArray)
 
   return (

@@ -4,13 +4,13 @@ import { BiSolidLeftArrow } from "react-icons/bi";
 import { Link, useParams } from "react-router-dom";
 import ClipLoader from "react-spinners/ClipLoader";
 import Loader from "../../Components/Loader";
-import NavBar from "../../Components/NavBar";
-import ProductForm from "../../Components/ProductForm";
+import NavBar from "../../Components/admin/NavBar";
+import ProductForm from "../../Components/admin/ProductForm";
 import WowSuchEmpty from "../../Components/WowSuchEmpty";
-import { useDeleteProduct } from "../../hooks/useDeleteProduct";
 import { useErrorNotification } from "../../hooks/useErrorNotification";
 import { useProductDetails } from "../../hooks/useProduct";
 import { Product, ProductResponse } from "../../types/product";
+import { useDeleteProduct } from "../../hooks/admin/useDeleteProduct";
 
 const ManageProduct = () => {
 
@@ -22,7 +22,7 @@ const ManageProduct = () => {
   
   const {mutate:deleteProduct,isPending:isDeletePending}=useDeleteProduct(id!);
 
-  useErrorNotification(isError,error,error?.message);
+  useErrorNotification(isError,error);
   
   const prevProductApiResponse:ProductResponse|undefined = queryClient.getQueryData(["allProducts"]);
   

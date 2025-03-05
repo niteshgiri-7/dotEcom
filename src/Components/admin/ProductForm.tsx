@@ -1,11 +1,12 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { IoClose } from "react-icons/io5";
 import ClipLoader from "react-spinners/ClipLoader";
-import { useAddNewProduct } from "../hooks/useAddNewProduct";
-import { useEditProduct } from "../hooks/useEditProduct";
-import { useErrorNotification } from "../hooks/useErrorNotification";
-import { Product, ProductFormData } from "../types/product";
-import { productFormSchema } from "../utils/formSchema";
+import { Product, ProductFormData } from "../../types/product";
+import { useAddNewProduct } from "../../hooks/admin/useAddNewProduct";
+import { useEditProduct } from "../../hooks/admin/useEditProduct";
+import { useErrorNotification } from "../../hooks/useErrorNotification";
+import { productFormSchema } from "../../utils/formSchema";
+
 
 
 
@@ -19,8 +20,8 @@ const ProductForm = ({ closeForm, product,id }: {
 
     const {mutate:updateProduct,error:errorOnEdit,isPending:isEditPending,isError:isErrorOnEdit} = useEditProduct(id!);
      
-    useErrorNotification(isErrorOnAdd,errorOnAdd,errorOnAdd?.message);
-    useErrorNotification(isErrorOnEdit,errorOnEdit,errorOnEdit?.message);
+    useErrorNotification(isErrorOnAdd,errorOnAdd);
+    useErrorNotification(isErrorOnEdit,errorOnEdit);
 
 //make edit,add,delete full fledge and invaldie cache data
 

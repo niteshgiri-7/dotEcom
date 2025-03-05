@@ -4,7 +4,7 @@ import Axios from "./../axiosInstance";
 
 export const getAllCoupons = async () => {
   const { data }: { data: CouponResponse } = await Axios.get(
-    "/payment/get-all-coupons",
+    "/coupon/get-all",
     requestConfigWithAuthToken
   );
   return data;
@@ -13,6 +13,6 @@ export const getAllCoupons = async () => {
 export const createNewCoupon = async(values:ICoupon)=>{
   console.log("calling create coupon api")
   console.log(values)
-  const {data}:{data:CreateCouponResponse} = await Axios.post("/payment/coupon/create-new",values,requestConfigWithAuthToken);
+  const {data}:{data:CreateCouponResponse} = await Axios.post("/coupon/create-new",values,requestConfigWithAuthToken);
   return data;
 }

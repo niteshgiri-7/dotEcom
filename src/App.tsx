@@ -2,12 +2,13 @@ import { lazy, Suspense } from "react";
 import { Navigate, Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import Loader from "./Components/Loader";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Provider } from "react-redux";
 import Login from "./Pages/Login";
-import SignUp from "./Pages/SingUp";
-import Home from "./Pages/User/Home";
-import UserLayout from "./Pages/User/UserLayout";
-import CartPage from "./Pages/User/Cart";
+import SignUp from "./Pages/SignUp";
 
+import UserLayout from "./Pages/User/UserLayout";
+
+import {store} from "./redux/store";
 
 const Dashboard = lazy(() => import("./Pages/Admin/Dashboard"));
 const Products = lazy(() => import("./Pages/Admin/Products"));
@@ -17,14 +18,21 @@ const Customers = lazy(() => import("./Pages/Admin/Customers"));
 const Coupon = lazy(() => import("./Pages/Admin/Coupon"));
 const Toss = lazy(() => import("./Pages/Admin/Toss"));
 const StopWatch = lazy(() => import("./Pages/Admin/StopWatch"));
+const Home = lazy(()=>import("./Pages/User/Home"));
+const CartPage = lazy(()=>import("./Pages/User/Cart"));
+const MyOrders = lazy(()=>import("./Pages/User/MyOrders"));
+const CheckoutPage = lazy(()=>import("./Pages/User/CheckOut"));
+const PaymentCallback = lazy(()=>import("./Pages/User/PaymentCallBack"));
 
 function App() {
   const queryClient = new QueryClient();
   return (
     <QueryClientProvider client={queryClient}>
+      <Provider store={store}>
       <Router>
         <Suspense fallback={<Loader />}>
           <Routes>
+
             <Route path="/" element={<Navigate to="/login" />} />
             <Route path="/signUp" element={<SignUp />} />
             <Route path="/login" element={<Login />} />
@@ -41,11 +49,16 @@ function App() {
             <Route path="/" element={<UserLayout />}>
               <Route path="/home" element={<Home />} />
               <Route path="/cart" element={<CartPage />} />
+              <Route path="/my-orders" element={<MyOrders/>}/>
+              <Route path="/checkout" element={<CheckoutPage />} />
+              <Route path="/payment-callback" element={<PaymentCallback/>}/>
+
             </Route>
 
           </Routes>
         </Suspense>
       </Router>
+      </Provider>
     </QueryClientProvider >
   );
 };

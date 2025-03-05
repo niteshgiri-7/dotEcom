@@ -1,8 +1,9 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { useCallback, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
-import { Product } from "../types/product";
+import { Product } from "../../types/product";
 import TableHOC from "./TableHOC";
+
 
 
 const ProductTable = ({data}:{data:Product[]}) => {

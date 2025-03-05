@@ -6,16 +6,31 @@ import WowSuchEmpty from '../../Components/WowSuchEmpty';
 import { useCategories } from '../../hooks/useCategories';
 import { useErrorNotification } from '../../hooks/useErrorNotification';
 import { useProducts } from '../../hooks/useProduct';
+import { Toaster } from 'react-hot-toast';
+import { AppDispatch, RootState } from '../../redux/store';
+import { useDispatch, useSelector } from 'react-redux';
+import { addItemsFromLocalStorage, TCartItem } from '../../redux/cartSlice';
 
 const HomePage: React.FC = () => {
 
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState<string>('');
   const [selectedCategory, setSelectedCategory] = useState<string>('');
   
   const { productsArray, isError, isPending, error } = useProducts();
   const {categories} = useCategories();
-  useErrorNotification(isError,error,error?.message);
+  useErrorNotification(isError,error);
 
+  const itemsInStore = useSelector((store:RootState)=>store.cart.cartItems)
+
+  const dispatch = useDispatch<AppDispatch>();
+
+  let cartItems:TCartItem[] = itemsInStore; 
+
+  if(itemsInStore?.length===0){
+    cartItems =JSON.parse(localStorage.getItem("cartItems")as string);
+    if(cartItems && cartItems.length>0)
+    dispatch(addItemsFromLocalStorage(cartItems)); 
+  }
 
 const filteredProducts = productsArray?.filter(product => {
   const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase());
@@ -81,6 +96,7 @@ const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
               ))}
             </div>
       }
+      <Toaster position="top-left"/>
     </div>
   );
 };

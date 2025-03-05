@@ -4,14 +4,15 @@ import toast, { Toaster } from "react-hot-toast";
 import { FaCopy } from "react-icons/fa";
 import ClipLoader from "react-spinners/ClipLoader";
 import * as Yup from "yup";
-import CouponTable from "../../Components/CouponTable";
+import CouponTable from "../../Components/admin/CouponTable";
 import Loader from "../../Components/Loader";
-import NavBar from "../../Components/NavBar";
+
 import { useCoupon, useCreateNewCoupon } from "../../hooks/useCoupon";
 import { useErrorNotification } from "../../hooks/useErrorNotification";
 import { ICoupon } from "../../types/coupon";
 import { generateCoupon } from "../../utils/generateCoupon";
 import WowSuchEmpty from "../../Components/WowSuchEmpty";
+import NavBar from "../../Components/admin/NavBar";
 
 export interface CouponFormInputType {
     inputString: string;
@@ -35,8 +36,8 @@ const Coupon = () => {
 
     const { mutate: createNewCoupon, isPending: isCreating, isError: isErrorOnCreate, error: errorOnCreate } = useCreateNewCoupon();
 
-    useErrorNotification(isError, error, error?.message);
-    useErrorNotification(isErrorOnCreate, errorOnCreate, errorOnCreate?.message);
+    useErrorNotification(isError, error);
+    useErrorNotification(isErrorOnCreate, errorOnCreate);
 
     const [couponCode, setCouponCode] = useState<string>("");
 

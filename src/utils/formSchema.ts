@@ -69,13 +69,23 @@ export const productFormSchema = Yup.object().shape({
   price: Yup.number()
     .min(2, "Too Short!")
     .max(9999, "Too Long!")
+    .typeError("Must be number")
     .required("Required"),
   stock: Yup.number()
     .min(1, "Too Low!")
     .max(9999, "Too High!")
+    .typeError("Must be number")
     .required("Required"),
   category: Yup.string()
     .min(2, "Too Short!")
     .max(50, "Too Long!")
     .required("Required"),
 });
+
+
+export const checkOutFormSchema = Yup.object().shape({
+  city:Yup.string().min(5,"Too Short!").required("Required"),
+  state:Yup.string().min(5).required("Required"),
+  pinCode:Yup.number().required("Required").test("length","Must be 4-6 digits",(code)=>code.toString().length>=4 && code.toString().length<=6).typeError("Must be number"),
+  couponCode:Yup.string(),
+})
