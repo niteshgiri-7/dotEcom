@@ -1,12 +1,13 @@
-import { createUserWithEmailAndPassword, deleteUser } from "firebase/auth";
+import { AxiosError } from "axios";
+import { FirebaseError } from "firebase/app";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Axios from "../api/axiosInstance";
 import { fireBaseAuth } from "../firebase/firebase";
 import { ILoginResponse, ISignUpFormValues } from "../types/login";
 import { appendSignUpFromData } from "../utils/appendFormData";
-import { useNavigate } from "react-router-dom";
-import { AxiosError } from "axios";
-import { FirebaseError } from "firebase/app";
+import deleteUserFromFireBase from "../utils/deleteUserFromFirebase";
 
 export interface IuserCredentials {
   email: string;
@@ -20,7 +21,6 @@ export interface IError {
 }
 
 export const useSignUp = () => {
-
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<IError>({
@@ -30,18 +30,18 @@ export const useSignUp = () => {
   });
 
   const handleSignUp = async (userData: ISignUpFormValues) => {
-    let user = null;//to delete the user upon failing to save user in backend(firebase le user save garyo tara backend le garena vaney tala catch block ma user delete garna lai)
+    let newlyCreatedFireBaseUser = null; //to delete the user upon failing to save user in backend(firebase le user save garyo tara backend le garena vaney tala catch block ma user delete garna lai)
     try {
       const { email, password } = userData;
       setIsLoading((prev) => !prev);
 
-      const signUp = await createUserWithEmailAndPassword(
+      const { user } = await createUserWithEmailAndPassword(
         fireBaseAuth,
         email,
         password
       );
-
-      user = signUp.user;
+      newlyCreatedFireBaseUser = user;
+      const token = await user.getIdToken();
 
       let formData = new FormData();
       //user is being passed additionally to append the uid of user in the form(user.uid)
@@ -53,43 +53,43 @@ export const useSignUp = () => {
         {
           headers: {
             "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${token}`,
           },
         }
       );
       if (status === 201) {
-        const token = await user.getIdToken(true);
-        localStorage.setItem("token", token);
+        const { role } = data.user;
 
-        localStorage.setItem("refreshToken", user.refreshToken);
-        
-        const {expirationTime} = await user.getIdTokenResult();
-
-        localStorage.setItem("tokenExpiryTime", expirationTime);
-
-
-      if (data.user.role === "admin") navigate("/admin/dashboard");
-      else navigate("/home")
-
+        if (role === "admin") navigate("/admin/dashboard", { replace: true });
+        else navigate("/home", { replace: true });
       } else {
         console.log("Backend error", data.message);
         throw new Error(data.message);
       }
 
-
       setIsLoading(false);
     } catch (error) {
-      console.log("hello from error",error)
-      if (user) {
-        await deleteUser(user);
-        console.log("user deleted due to backend error");
+      
+      console.log("hello from error", error);
+      deleteUserFromFireBase(newlyCreatedFireBaseUser);
+      
+      if (error instanceof FirebaseError)
+        setError((prev) => ({
+          ...prev,
+          name: error.name,
+          isError: true,
+          message: error.code,
+        }));
+
+      if (error instanceof AxiosError) {
+        setError((prev) => ({
+          ...prev,
+          name: error.name,
+          isError: true,
+          message: error.response?.data.message,
+        }));
       }
-      if(error instanceof FirebaseError)
-        setError((prev)=>({...prev,name:error.name,isError:true,message:error.code}))
-        
-      if(error instanceof AxiosError){
-        setError((prev)=>({...prev,name:error.name,isError:true,message:error.response?.data.message}))
-      }
-     setIsLoading((prev)=>!prev);
+      setIsLoading((prev) => !prev);
     }
   };
 

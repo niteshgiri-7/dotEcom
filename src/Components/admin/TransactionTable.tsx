@@ -19,24 +19,14 @@ const TransactionTable = ({data}:{data:Transaction[]})=>{
             cell:(info)=>info.getValue()
         },
         {
-            accessorKey:'deliveryCharge',
-            header:'DeliveryCharge',
-            cell:(info)=>info.getValue()
-        },
-        {
-            accessorKey:'discount',
-            header:'Discount',
-            cell:(info)=>info.getValue()
-        },
-        {
             accessorFn:(row)=>row.orderedItems.reduce((sum:number,item:OrderedItem)=>sum+item.quantity,0),
             header:'Quantity',
-            cell:(info)=>info.getValue()
+            cell:(info)=><i>{info.getValue()}</i>
         },
         {    
              accessorKey:"total",
              header:'Total',
-             cell:(info)=>info.getValue()
+             cell:(info)=><>Rs.{info.getValue()}</>
         },
         {
             accessorKey:'status',

@@ -146,7 +146,7 @@ const Inventory = memo(({ name, count, percentage }: InventoryDataType) => {
   console.log("inventory")
   return (
     <div className="flex items-center gap-2 w-full my-2">
-      <span className="min-w-[20%] font-semibold text-start">{name.toLowerCase()}</span>
+      <span className="min-w-[20%] font-semibold text-start">{name.charAt(0).toUpperCase()+name.slice(1)}</span>
       <div className="w-full rounded-lg h-2">
         <div
           className="h-2 rounded-lg"

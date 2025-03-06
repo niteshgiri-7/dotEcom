@@ -12,18 +12,13 @@ const DashboardTable = memo(({ data }: { data: TransactionType[] }) => {
     () => [
       {
         accessorKey: '_id',
-        cell: (info) => info.getValue(),
+        cell: (info) => <span>{info.getValue().toString().slice(0,10)}...</span>,
         enableSorting: false,
       },
       {
         accessorKey: "total",
         cell: (info) => info.getValue(),
         header: () => "Total"
-      },
-      {
-        accessorKey: "discount",
-        cell: (info) => info.getValue(),
-        header: () => "Discount"
       },
       {
         accessorKey: "quantity",

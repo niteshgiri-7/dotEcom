@@ -2,6 +2,8 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
 import { fireBaseAuth } from "../firebase/firebase";
 import { useNavigate } from "react-router-dom";
+import Axios from "../api/axiosInstance";
+import { ILoginResponse } from "../types/login";
 
 export interface IuserCredentials {
   email: string;
@@ -29,7 +31,6 @@ export const useLogin = () => {
   }
 
   const handleLogin = async (userData: IuserCredentials) => {
-    let user =null;
     try {
 
       const { email, password } = userData;
@@ -39,17 +40,21 @@ export const useLogin = () => {
         email,
         password
       );
-
-       user = login.user; 
+      const {user} = login;
       const token = await user.getIdToken(true);
-      const {expirationTime,claims} = await user.getIdTokenResult();
-      
-     localStorage.setItem("token",token);
-     localStorage.setItem("refreshToken",user.refreshToken);
-     localStorage.setItem("tokenExpiryTime",expirationTime);
-    
-      if(claims.role==="admin" && token) navigate("/admin/dashboard");
-      else navigate("/home");
+     
+      const {data,status} = await Axios.post<ILoginResponse>("/user/login",{},{
+        headers:{
+          Authorization:`Bearer ${token}`
+        }
+      })
+
+      if(status===200){
+        if(data.user.role==="admin")
+          navigate("/admin/dashboard",{replace:true});
+        else
+          navigate("/home",{replace:true});
+      }
      
       setIsLoading((prev) => !prev);
     } catch (error) {

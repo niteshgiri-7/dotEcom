@@ -1,4 +1,3 @@
-import { requestConfigWithAuthToken } from './axiosConfig';
 import Axios from "./axiosInstance";
 
 interface CategoryResponse {
@@ -7,8 +6,6 @@ interface CategoryResponse {
 }
 
 export const getAllCategories = async ()=>{
-    const {data} = await Axios.get<CategoryResponse>("/products/categories",requestConfigWithAuthToken);
+    const {data} = await Axios.get<CategoryResponse>("/products/categories");
     return data.categories;
-
-
 }
