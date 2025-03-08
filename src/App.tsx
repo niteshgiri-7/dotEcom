@@ -8,9 +8,11 @@ import SignUp from "./Pages/SignUp";
 
 import UserLayout from "./Pages/User/UserLayout";
 
-import {store} from "./redux/store";
+import { store } from "./redux/store";
 
 import "./api/axiosInterceptor";
+import ProtectedAdminRoutes from "./Components/ProtectedAdminRoutes";
+import ProtectedUserRoute from "./Components/ProtectedUserRoute";
 
 const Dashboard = lazy(() => import("./Pages/Admin/Dashboard"));
 const Products = lazy(() => import("./Pages/Admin/Products"));
@@ -20,46 +22,52 @@ const Customers = lazy(() => import("./Pages/Admin/Customers"));
 const Coupon = lazy(() => import("./Pages/Admin/Coupon"));
 const Toss = lazy(() => import("./Pages/Admin/Toss"));
 const StopWatch = lazy(() => import("./Pages/Admin/StopWatch"));
-const Home = lazy(()=>import("./Pages/User/Home"));
-const CartPage = lazy(()=>import("./Pages/User/Cart"));
-const MyOrders = lazy(()=>import("./Pages/User/MyOrders"));
-const CheckoutPage = lazy(()=>import("./Pages/User/CheckOut"));
-const PaymentCallback = lazy(()=>import("./Pages/User/PaymentCallBack"));
+const Home = lazy(() => import("./Pages/User/Home"));
+const CartPage = lazy(() => import("./Pages/User/Cart"));
+const MyOrders = lazy(() => import("./Pages/User/MyOrders"));
+const CheckoutPage = lazy(() => import("./Pages/User/CheckOut"));
+const PaymentCallback = lazy(() => import("./Pages/User/PaymentCallBack"));
 
 function App() {
   const queryClient = new QueryClient();
   return (
     <QueryClientProvider client={queryClient}>
       <Provider store={store}>
-      <Router>
-        <Suspense fallback={<Loader />}>
-          <Routes>
+        <Router>
+          <Suspense fallback={<Loader />}>
+            <Routes>
 
-            <Route path="/" element={<Navigate to="/login" />} />
-            <Route path="/signUp" element={<SignUp />} />
-            <Route path="/login" element={<Login />} />
+              <Route path="/" element={<Navigate to="/login" />} />
+              <Route path="/signUp" element={<SignUp />} />
+              <Route path="/login" element={<Login />} />
 
-            <Route path="/admin/dashboard" element={<Dashboard />} />
-            <Route path="/admin/products" element={<Products />} />
-            <Route path="/admin/products/:id" element={<ManageProduct />} />
-            <Route path="/admin/transactions" element={<Transaction />} />
-            <Route path="/admin/customers" element={<Customers />} />
-            <Route path="/admin/coupon" element={<Coupon />} />
-            <Route path="/admin/toss" element={<Toss />} />
-            <Route path="/admin/stop-watch" element={<StopWatch />} />
+              <Route element={<ProtectedAdminRoutes />}>
 
-            <Route path="/" element={<UserLayout />}>
-              <Route path="/home" element={<Home />} />
-              <Route path="/cart" element={<CartPage />} />
-              <Route path="/my-orders" element={<MyOrders/>}/>
-              <Route path="/checkout" element={<CheckoutPage />} />
-              <Route path="/payment-callback" element={<PaymentCallback/>}/>
+                <Route path="/admin/dashboard" element={<Dashboard />} />
+                <Route path="/admin/products" element={<Products />} />
+                <Route path="/admin/products/:id" element={<ManageProduct />} />
+                <Route path="/admin/transactions" element={<Transaction />} />
+                <Route path="/admin/customers" element={<Customers />} />
+                <Route path="/admin/coupon" element={<Coupon />} />
+                <Route path="/admin/toss" element={<Toss />} />
+                <Route path="/admin/stop-watch" element={<StopWatch />} />
+              </Route>
 
-            </Route>
+              <Route element={<ProtectedUserRoute />}>
 
-          </Routes>
-        </Suspense>
-      </Router>
+                <Route path="/" element={<UserLayout />}>
+                  <Route path="/home" element={<Home />} />
+                  <Route path="/cart" element={<CartPage />} />
+                  <Route path="/my-orders" element={<MyOrders />} />
+                  <Route path="/checkout" element={<CheckoutPage />} />
+                  <Route path="/payment-callback" element={<PaymentCallback />} />
+                </Route>
+
+              </Route>
+
+            </Routes>
+          </Suspense>
+        </Router>
       </Provider>
     </QueryClientProvider >
   );
