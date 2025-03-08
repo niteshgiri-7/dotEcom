@@ -32,7 +32,6 @@ interface DoughnutChartPropsType {
 }
 
 const DoughnutChart = memo(({offset,legends=true,labels,data,backgroundColor,cutout}:DoughnutChartPropsType) => {
-  console.log("donot chart")
 const doughnutData:ChartData<"doughnut",number[],string>={
   labels,
   datasets:[{

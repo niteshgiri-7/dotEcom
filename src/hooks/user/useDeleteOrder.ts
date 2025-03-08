@@ -27,7 +27,6 @@ const useDeleteOrder = (id:string)=>{
         onError:(error,_variables,context)=>{
             queryClient.setQueryData(["myOrders"],context?.prevMyOrderResponse);
             toast.error("Failed to Cancel Order");
-            console.log(error);
         }
     })
 };

@@ -14,6 +14,7 @@ export interface OrderedItem{
     quantity:number;
     price:number;
     productId:string;
+    _id?:string;
 }
 
 export interface IinitiatePaymentRequestPayload {

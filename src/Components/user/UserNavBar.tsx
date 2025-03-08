@@ -14,7 +14,6 @@ const UserNavBar = () => {
   const {handleLogOut}=useLogOut();
 
   const cartItemsLength = useSelector((state: RootState) => state.cart.cartItems.length);
-  console.log(cartItemsLength)
   let noOfCartItiems:number=0;
 
   if(cartItemsLength===0){

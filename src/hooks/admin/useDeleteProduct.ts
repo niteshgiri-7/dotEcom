@@ -14,7 +14,6 @@ export const useDeleteProduct = (id:number|string)=>{
             mutationFn:deleteProduct,
 
             onMutate:()=>{
-                console.log("mutating")
                 const prevProductApiResponse:ProductResponse|undefined = queryClient.getQueryData(["allProducts"]);
 
                 const productDetailsApiResponse:ProductResponse|undefined=queryClient.getQueryData([`product${id}`]);

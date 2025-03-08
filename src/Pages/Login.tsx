@@ -1,22 +1,25 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import { Toaster } from "react-hot-toast";
+import { ChangeEvent } from "react";
+import toast, { Toaster } from "react-hot-toast";
 import { BiLock, BiLogIn, BiStore } from "react-icons/bi";
 import { HiMail } from "react-icons/hi";
+import { Link } from "react-router-dom";
 import ClipLoader from "react-spinners/ClipLoader";
 import { useErrorNotification } from "../hooks/useErrorNotification";
 import { useLogin } from "../hooks/useLogin";
 import { LoginPageImage } from "../utils/constants";
 import { loginFormValidationSchema } from "../utils/formSchema";
 import { LoginFormInitialValues } from "../utils/initialFormValues";
-import { Link } from "react-router-dom";
-import { ChangeEvent } from "react";
 
 
 
 const Login = () => {
 
+
     const { handleLogin, isLoading, error, clearError } = useLogin();
     useErrorNotification(error.isError, error);
+
+  
 
     return (
         <div className="min-h-screen flex">
@@ -49,7 +52,7 @@ const Login = () => {
                         initialValues={LoginFormInitialValues}
                         validationSchema={loginFormValidationSchema}
                         onSubmit={(values) => {
-
+                            localStorage.setItem("rememberMe",JSON.stringify(values.rememberMe));
                             handleLogin(values);
                         }}
                     >
@@ -70,7 +73,7 @@ const Login = () => {
                                             className="pl-10 w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white"
                                             placeholder="Enter your email"
                                             required
-                                            onChange={(e:ChangeEvent<HTMLInputElement>) => { setFieldValue("email", e.target.value); clearError(); }}
+                                            onChange={(e: ChangeEvent<HTMLInputElement>) => { setFieldValue("email", e.target.value); clearError(); }}
                                         />
                                     </div>
                                     <ErrorMessage name="email" component="div" className="text-sm text-red-500" />
@@ -90,7 +93,7 @@ const Login = () => {
                                             className="pl-10 w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white"
                                             placeholder="Enter your password"
                                             required
-                                            onChange={(e:ChangeEvent<HTMLInputElement>)=>{setFieldValue("password",e.target.value); clearError();}}
+                                            onChange={(e: ChangeEvent<HTMLInputElement>) => { setFieldValue("password", e.target.value); clearError(); }}
                                         />
                                     </div>
                                     <ErrorMessage name="password" component="div" className="text-sm text-red-500" />
@@ -98,8 +101,9 @@ const Login = () => {
                                 </div>
                                 <div className="flex items-center justify-between">
                                     <div className="flex items-center">
-                                        <input
-                                            id="remember-me"
+                                        <Field
+                                            id="rememberMe"
+                                            name="rememberMe"
                                             type="checkbox"
                                             className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
                                         />
@@ -107,7 +111,7 @@ const Login = () => {
                                             Remember me
                                         </label>
                                     </div>
-                                    <a href="#" className="text-sm font-medium text-blue-600 hover:text-blue-500">
+                                    <a href="#" className="text-sm font-medium text-blue-600 hover:text-blue-500" onClick={() => toast.error("This feature has not been brewed yet.Coming soon! Sorry Captain!")}>
                                         Forgot password?
                                     </a>
                                 </div>

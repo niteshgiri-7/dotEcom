@@ -30,7 +30,6 @@ export const verifyPayment = async()=>{
 
    const payload = getPaymentVerificationPayload();
 
-   if(!payload) return console.log("missing payload");
 
     const {data} = await Axios.post<IverifyPaymentResponse>("/payment/verify",payload,requestConfigWithAuthToken)
     return data;

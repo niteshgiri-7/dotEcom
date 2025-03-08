@@ -15,7 +15,6 @@ export const useCreateNewCoupon=()=>{
         mutationKey:["createCoupon"],
         mutationFn:createNewCoupon,
         onSuccess:()=>{
-            console.log("created successfully");
             toast.success("Coupon Created Successfully!");
             queryClient.invalidateQueries({
                 queryKey:["allCoupons"]

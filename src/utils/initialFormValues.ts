@@ -13,4 +13,5 @@ export const signUpFromInitialValues: ISignUpFormValues = {
 export const LoginFormInitialValues: IuserCredentials = {
   email: "",
   password: "",
+  rememberMe:false,
 };

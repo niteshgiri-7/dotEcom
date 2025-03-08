@@ -10,6 +10,8 @@ import UserLayout from "./Pages/User/UserLayout";
 
 import {store} from "./redux/store";
 
+import "./api/axiosInterceptor";
+
 const Dashboard = lazy(() => import("./Pages/Admin/Dashboard"));
 const Products = lazy(() => import("./Pages/Admin/Products"));
 const ManageProduct = lazy(() => import("./Pages/Admin/ManageProduct"))

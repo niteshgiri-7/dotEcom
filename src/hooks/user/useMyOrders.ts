@@ -5,6 +5,6 @@ import { getMyOrders } from "../../api/User/getMyOrders"
 export const useMyOrders=()=>{
     return useQuery({
         queryKey:["myOrders"],
-        queryFn:getMyOrders
+        queryFn:getMyOrders,
     })
 }

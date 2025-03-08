@@ -21,8 +21,6 @@ export const editProduct = async({values,id}:{values:ProductFormData,id:string|n
 
     let formData = new FormData();
     formData= appendProductFormData(formData,values);
-    console.log(values,"data")
-    console.log(formData,"from edit")
     const response = await Axios.put(`/products/${id}`,formData,requestConfigWithMultipartFormDataAndAuthToken);
     return response;
 

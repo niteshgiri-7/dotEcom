@@ -8,6 +8,7 @@ import { ILoginResponse } from "../types/login";
 export interface IuserCredentials {
   email: string;
   password: string;
+  rememberMe:boolean;
 }
 
 export interface IError {
@@ -33,7 +34,7 @@ export const useLogin = () => {
   const handleLogin = async (userData: IuserCredentials) => {
     try {
 
-      const { email, password } = userData;
+      const { email, password ,rememberMe} = userData;
       setIsLoading((prev) => !prev);
       const login = await signInWithEmailAndPassword(
         fireBaseAuth,
@@ -43,11 +44,13 @@ export const useLogin = () => {
       const {user} = login;
       const token = await user.getIdToken(true);
      
-      const {data,status} = await Axios.post<ILoginResponse>("/user/login",{},{
+      const {data,status} = await Axios.post<ILoginResponse>("/user/login",{rememberMe},{
         headers:{
           Authorization:`Bearer ${token}`
         }
       })
+      
+       
 
       if(status===200){
         if(data.user.role==="admin")

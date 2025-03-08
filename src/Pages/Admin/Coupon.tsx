@@ -31,7 +31,6 @@ const couponFormSchema = Yup.object().shape({
 })
 
 const Coupon = () => {
-    console.log("rendered coupon")
     const { data, isError, error, isPending } = useCoupon();
 
     const { mutate: createNewCoupon, isPending: isCreating, isError: isErrorOnCreate, error: errorOnCreate } = useCreateNewCoupon();
@@ -70,7 +69,7 @@ const Coupon = () => {
     }
 
     return (
-        <div className="md:flex h-screen  min-w-full bg-gray-200">
+        <div className="md:flex min-h-screen  min-w-[100vw] bg-gray-200">
             <NavBar />
             <main className="flex-1 p-8 lg:flex lg:gap-2 max-w-full  ">
                 <div className="bg-white min-h-fit lg:h-full lg:flex lg:flex-col justify-center items-center  lg:max-h-[38.5rem] rounded-lg p-3">

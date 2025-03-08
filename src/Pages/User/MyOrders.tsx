@@ -8,7 +8,6 @@ import { Link } from "react-router-dom";
 
 const MyOrders = () => {
   const { data, isError, error, isLoading } = useMyOrders();
-  console.log(data);
   useErrorNotification(isError, error);
   return (
     <div className="p-4">

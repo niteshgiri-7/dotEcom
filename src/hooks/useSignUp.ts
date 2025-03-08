@@ -69,10 +69,8 @@ export const useSignUp = () => {
 
       setIsLoading(false);
     } catch (error) {
-      
-      console.log("hello from error", error);
-      deleteUserFromFireBase(newlyCreatedFireBaseUser);
-      
+      await deleteUserFromFireBase(newlyCreatedFireBaseUser);
+
       if (error instanceof FirebaseError)
         setError((prev) => ({
           ...prev,

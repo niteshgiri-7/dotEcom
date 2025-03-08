@@ -7,7 +7,6 @@ export const useProducts = ()=>{
         queryKey:["allProducts"],
         queryFn:getAllProducts,
     });
-    console.log(data)
     const productsArray:Product[]= data?.Products as Product[]  ;
     return {productsArray,isError,error,isPending};
 };
@@ -15,7 +14,6 @@ export const useProducts = ()=>{
 export const useProductDetails = (id:number|string)=>{
     const queryClient = useQueryClient();
     const cachedProductDetailsApiResponse:ProductResponse|undefined = queryClient.getQueryData(["allProducts"]);
-    console.log(cachedProductDetailsApiResponse,"api response cached")
     return (
         useQuery({
             queryKey:[`product${id}`],

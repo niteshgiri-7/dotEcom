@@ -68,10 +68,10 @@ const NavBar = () => {
         },
     ]
     return (
-        <aside >
+        <aside className="" >
             <button className={`absolute ${isOpen ? "translate-x-48" : "-translate-x-0"} duration-300 ease-in-out md:hidden z-30 font-bold text-3xl  inline-block`} onClick={handleToggle}>{isOpen ? <IoClose /> : <HiMenu />}
             </button>
-            <nav className={`fixed md:static bg-white h-screen w-[14rem] md:w-fit lg:min-w-[20vw] ${!isOpen ? "-translate-x-full" : "translate-x-0"} transition-transform duration-300 ease-in-out md:translate-x-0 z-20 p-2 md:p-4 font-bold text-lg lg:text-xl`}>
+            <nav className={`fixed md:static bg-white min-h-screen h-full w-[14rem] md:w-fit lg:min-w-[20vw] ${!isOpen ? "-translate-x-full" : "translate-x-0"} transition-transform duration-300 ease-in-out md:translate-x-0 z-20 p-2 md:p-4 font-bold text-lg lg:text-xl`}>
 
                <div className="w-1/3 flex md:justify-end">
                 <BiStore className="mt-4 md:mt-0 text-5xl md:text-6xl text-blue-800"/>

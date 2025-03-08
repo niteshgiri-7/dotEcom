@@ -34,7 +34,6 @@ interface BarChartPropsType{
 const months = ['January', 'February', 'March', 'April', 'May', 'June'];
 
 const BarChart= memo(({horizontal=false,dataSet_1,dataSet_2,bgColor1,bgColor2,labels=months,title1,title2}:BarChartPropsType)=> {
- console.log("barchart")
   const options:ChartOptions<"bar"> = {
     responsive: true,
     indexAxis: horizontal?"y":"x",

@@ -18,7 +18,6 @@ import { usePayWithKhalti } from "../../hooks/user/usePayWithKhalti"
 
   const navigate = useNavigate();
   const {mutate:initiatePayment,isError,error,isPending} = usePayWithKhalti();
-  console.log("error",error)
   useErrorNotification(isError,error);
 
   const items = useSelector((store:RootState)=>store.cart.cartItems);

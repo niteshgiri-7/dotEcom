@@ -31,7 +31,7 @@ const DashboardTable = memo(({ data }: { data: TransactionType[] }) => {
           if (info.getValue() === "pending payment")
             return "pending";
           else
-            return info.getValue();
+            return <span className='rounded-2xl'>{info.getValue()}</span>
         },
         header: () => "Status"
       }

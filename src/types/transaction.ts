@@ -16,7 +16,7 @@ export interface OrderedItem{
 }
 
 export interface Transaction{
-    _id:string|number;
+    _id:number;
     shippingInfo:ShippingInfo;
     status:"pending payment"|"processing"|"delivered"|"shipped";
     orderedBy:{

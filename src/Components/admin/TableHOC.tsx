@@ -89,7 +89,7 @@ const TableHOC = <T extends object, U>(columns: ColumnDef<T, U>[], data: T[], he
                                         }
                                          
                                         return (
-                                            <td className={`text-center  rounded-2xl p-1`} key={cell.id} style={{ backgroundColor: StatusColor[status] }}>
+                                            <td className={`text-center ${(cell.id==="validity" || cell.column.id==="status")?'rounded-2xl':""} p-1`} key={cell.id} style={{ backgroundColor: StatusColor[status] }}>
                                                 {flexRender(cell.column.columnDef.cell, cell.getContext())}
                                             </td>
                                         )

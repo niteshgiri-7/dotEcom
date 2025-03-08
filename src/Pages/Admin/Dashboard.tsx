@@ -143,7 +143,6 @@ const Dashboard = () => {
 
 const Inventory = memo(({ name, count, percentage }: InventoryDataType) => {
   const color = `hsl(${percentage / 100 * 120}, 100%, 50%)`;
-  console.log("inventory")
   return (
     <div className="flex items-center gap-2 w-full my-2">
       <span className="min-w-[20%] font-semibold text-start">{name.charAt(0).toUpperCase()+name.slice(1)}</span>

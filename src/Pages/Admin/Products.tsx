@@ -15,7 +15,6 @@ const Products = () => {
   const [isFormOpen, setIsFormOpen] = useState<boolean>(false);
   const { productsArray, isError, error, isPending} = useProducts();
   useErrorNotification(isError, error);
-  console.log("from page",productsArray)
 
   return (
     <div className="flex min-h-screen  bg-gray-100 relative ">

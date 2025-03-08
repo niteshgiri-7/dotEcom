@@ -11,7 +11,6 @@ const ProductCard= ({ product }:{product:Product}) => {
   const dispatch = useDispatch();
 
   const handleAddToCart = (product:Product)=>{
-    console.log(product);
      dispatch(addItemInCart(product))
      toast.success("Item added to cart")
   }

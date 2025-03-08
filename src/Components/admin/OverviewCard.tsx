@@ -5,7 +5,6 @@ import { OverViewCountType } from '../../types/dashboard';
 
 
 const OverviewCard = memo(({ name, count, rate }: OverViewCountType) => {
-    console.log("card")
     const color = `hsl(${Math.round((rate / 100) * 120)}, 100%, 45%)`;
 
     return (

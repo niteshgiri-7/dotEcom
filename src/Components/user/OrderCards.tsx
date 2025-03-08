@@ -21,7 +21,6 @@ const OrderCards = ({ order }: { order: IOrder }) => {
   const {mutate:deleteOrder} = useDeleteOrder(order._id);
 
  const handleDeleteOrder=()=>{
-  console.log("calling handleDeleteOrder")
   deleteOrder(order._id);
  }
 
@@ -72,10 +71,10 @@ const OrderCards = ({ order }: { order: IOrder }) => {
         <>
           <hr></hr>
           <div className="m-2">
-            <span className="font-semibold">Ordered Items</span>
+            <span className="font-semibold">Order Items</span>
             {
               order.orderedItems.map((order) =>
-                <Item item={order} />
+                <Item item={order} key={order._id}/>
               )
             }
           </div>
@@ -94,11 +93,12 @@ export default OrderCards;
 
 const Item = ({ item }: { item: OrderedItem }) => {
 
+
   return (
     <>
     <div className="flex justify-between p-2">
       <div>
-        <p className="font-normal">{item.name}</p>
+        <p>{item.name}</p>
         <p className="font-semibold text-gray-500">Qty:{item.quantity}</p>
       </div>
 

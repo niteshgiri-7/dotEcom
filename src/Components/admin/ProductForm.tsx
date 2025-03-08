@@ -26,7 +26,6 @@ const ProductForm = ({ closeForm, product,id }: {
 //make edit,add,delete full fledge and invaldie cache data
 
     const handleSubmit = (values: ProductFormData) => {
-        console.log("calling mutate")
         if (!closeForm && product)
             updateProduct({values,id:id!});
         else
