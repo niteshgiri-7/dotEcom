@@ -29,6 +29,11 @@ export const useSignUp = () => {
     message: "",
   });
 
+  const clearError = () => {
+    if(error.isError)
+    setError((prev) => ({ ...prev, isError: false, name: "", message: "" }));
+  };
+
   const handleSignUp = async (userData: ISignUpFormValues) => {
     let newlyCreatedFireBaseUser = null; //to delete the user upon failing to save user in backend(firebase le user save garyo tara backend le garena vaney tala catch block ma user delete garna lai)
     try {
@@ -91,5 +96,5 @@ export const useSignUp = () => {
     }
   };
 
-  return { isLoading, error, handleSignUp };
+  return { isLoading, error, handleSignUp ,clearError};
 };

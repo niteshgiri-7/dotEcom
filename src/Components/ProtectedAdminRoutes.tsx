@@ -4,7 +4,7 @@ import Loader from "./Loader";
 
 const ProtectedAdminRoutes = () => {
   const { data: user, isPending } = useAuth();
-
+  console.log(user);
   if (isPending) return <Loader />;
 
   if (user?.success && user.isAuthenticated && user.role === "admin") {

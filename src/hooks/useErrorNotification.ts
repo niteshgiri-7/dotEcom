@@ -1,16 +1,21 @@
 import { AxiosError } from "axios";
+import { FirebaseError } from "firebase/app";
 import { useEffect } from "react"
 import toast from "react-hot-toast";
 
 
 
 export const useErrorNotification = (isError:boolean,error:Error|null)=>{
-     
+     console.log(isError,error)
     useEffect(()=>{
          if(isError && error){
+           
+            if(error instanceof FirebaseError)
+            
+
             if(error instanceof AxiosError){
             let message = error.response?.data?.message as string || error.message || "Something went wrong";
-
+            
             if(message.toLowerCase().includes("firebase"))
                 message="Auth Failed";
             

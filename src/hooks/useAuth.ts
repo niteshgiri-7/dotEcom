@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 const auth = getAuth();
 
 export const useAuth = () => {
+  console.log("calling useAuth");
   const [isAuthReady, setIsAuthReady] = useState<boolean>(false);
 
   useEffect(() => {

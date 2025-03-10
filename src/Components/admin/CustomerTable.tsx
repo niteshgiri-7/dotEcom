@@ -37,7 +37,7 @@ const CustomerTable = ({data}:{data:CustomerData[]}) => {
     );
 
     return (
-        TableHOC<CustomerData, string>(columns, data, "Customers", false)()
+        TableHOC<CustomerData, string>(columns, data, "Customers",data.length>10?true:false)()
     );
 };
 

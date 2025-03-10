@@ -1,6 +1,6 @@
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { Calendar, Image, Lock, Mail, Store, User, Users } from 'lucide-react';
-import { useRef } from 'react';
+import { ChangeEvent, useRef } from 'react';
 import { Toaster } from 'react-hot-toast';
 import ClipLoader from 'react-spinners/ClipLoader';
 import { useErrorNotification } from '../hooks/useErrorNotification';
@@ -15,7 +15,8 @@ const SignUp = () => {
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const { handleSignUp, isLoading, error } = useSignUp();
+  const { handleSignUp, isLoading, error ,clearError} = useSignUp();
+  
   useErrorNotification(error.isError, error);
 
   return (
@@ -87,12 +88,14 @@ const SignUp = () => {
                     autoComplete="username"
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white"
                     placeholder="you@example.com"
+                    onChange={(e:ChangeEvent<HTMLInputElement>)=>{setFieldValue("email",e.target.value); clearError()}}
                   />
                   <ErrorMessage
                     name="email"
                     component="div"
                     className="mt-1 text-sm text-red-600"
                   />
+                     <span className='text-sm text-red-600'>{error.message}</span>
                 </div>
 
                 <div>
@@ -160,6 +163,7 @@ const SignUp = () => {
                     component="div"
                     className="mt-1 text-sm text-red-600"
                   />
+               
                 </div>
 
                 <div>

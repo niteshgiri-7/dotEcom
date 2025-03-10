@@ -1,8 +1,9 @@
+import { AxiosError } from "axios";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
-import { fireBaseAuth } from "../firebase/firebase";
 import { useNavigate } from "react-router-dom";
 import Axios from "../api/axiosInstance";
+import { fireBaseAuth } from "../firebase/firebase";
 import { ILoginResponse } from "../types/login";
 
 export interface IuserCredentials {
@@ -28,6 +29,7 @@ export const useLogin = () => {
   });
 
   const clearError=()=>{
+    if(error.isError)
     setError((prev)=>({...prev,isError:false,name:"",message:""}))
   }
 
@@ -63,17 +65,17 @@ export const useLogin = () => {
     } catch (error) {
       if (error instanceof Error) {
         if (error.message.includes("(auth/email-already-in-use)"))
-          setError((prev) => ({ ...prev, message: "Email Already Exists" }));
+          setError((prev) => ({ ...prev, message: "Email Already Exists" ,isError:true}));
         if(error.message.includes("(auth/invalid-credential)"))
-          setError((prev)=>({...prev,message:"Invalid Credentials"}))
-        else
+          setError((prev)=>({...prev,message:"Invalid Credentials",isError:true}))
+        else if(error instanceof AxiosError)
         setError((prev) => ({
           ...prev,
           isError: true,
           name: error.name,
-          message: error.message,
+          message:error.response?.data?.message,
         }));
-        setIsLoading((prev) => !prev);
+        setIsLoading(false);
       }
     }
   };
