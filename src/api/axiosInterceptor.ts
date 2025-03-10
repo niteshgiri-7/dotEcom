@@ -21,13 +21,13 @@ Axios.interceptors.response.use(
       ICustomAxiosRequestConfig
     >
   ) => {
-    console.log("error", error);
+
     if (!error.config) return Promise.reject(error);
 
     const originalRequest: ICustomAxiosRequestConfig = error.config;
-    console.log("originalRequest", originalRequest);
+
     originalRequest._retry = false;
-    console.log("retry", originalRequest._retry);
+  
 
     if (
       error.response?.status === 401 &&
@@ -41,7 +41,7 @@ Axios.interceptors.response.use(
         if (!user) throw new Error("No User logged in!");
 
         const newToken = await user.getIdToken(true);
-        console.log("newToken", newToken);
+
         await Axios.post(
           "/user/refresh-token",
           { rememberMe },
@@ -55,7 +55,7 @@ Axios.interceptors.response.use(
 
         return Axios(originalRequest);
       } catch (refreshError) {
-        console.log(refreshError);
+
         return Promise.reject(refreshError);
       }
     }

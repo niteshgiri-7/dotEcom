@@ -30,7 +30,6 @@ import { usePayWithKhalti } from "../../hooks/user/usePayWithKhalti"
   cartItems = items;
    
    useEffect(() => {
-     console.log(cartItems)
     if (!cartItems) {
       navigate("/home", { replace: true });
     }

@@ -8,6 +8,7 @@ import { fireBaseAuth } from "../firebase/firebase";
 import { ILoginResponse, ISignUpFormValues } from "../types/login";
 import { appendSignUpFromData } from "../utils/appendFormData";
 import deleteUserFromFireBase from "../utils/deleteUserFromFirebase";
+import { setAuthInLocalStorage } from "../utils/localStorage";
 
 export interface IuserCredentials {
   email: string;
@@ -64,7 +65,7 @@ export const useSignUp = () => {
       );
       if (status === 201) {
         const { role } = data.user;
-
+         setAuthInLocalStorage(role);
         if (role === "admin") navigate("/admin/dashboard", { replace: true });
         else navigate("/home", { replace: true });
       } else {

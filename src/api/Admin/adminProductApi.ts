@@ -1,4 +1,3 @@
-import { requestConfigWithAuthToken, requestConfigWithMultipartFormDataAndAuthToken } from "../axiosConfig";
 import { ProductFormData, ProductResponse } from "../../types/product";
 import { appendProductFormData } from "../../utils/appendFormData";
 import Axios from "../axiosInstance";
@@ -13,7 +12,7 @@ export const addNewProduct = async (values: ProductFormData) => {
     
     formData=appendProductFormData(formData,values);
     
-    const {data}:{data:ProductResponse} = await Axios.post("/products/add-new",formData,requestConfigWithMultipartFormDataAndAuthToken);
+    const {data}:{data:ProductResponse} = await Axios.post("/products/add-new",formData);
     return data;
 }
 
@@ -21,12 +20,12 @@ export const editProduct = async({values,id}:{values:ProductFormData,id:string|n
 
     let formData = new FormData();
     formData= appendProductFormData(formData,values);
-    const response = await Axios.put(`/products/${id}`,formData,requestConfigWithMultipartFormDataAndAuthToken);
+    const response = await Axios.put(`/products/${id}`,formData);
     return response;
 
 }
 
 export const deleteProduct = async(id:string|number)=>{
-      const {data}:{data:ProductResponse} = await Axios.delete(`/products/${id}`,requestConfigWithAuthToken);
+      const {data}:{data:ProductResponse} = await Axios.delete(`/products/${id}`);
       return data;
 }

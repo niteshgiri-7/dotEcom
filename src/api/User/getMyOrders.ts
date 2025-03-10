@@ -1,5 +1,4 @@
 import { OrderedItem } from "../../types/payment";
-import { requestConfigWithAuthToken } from "../axiosConfig";
 import Axios from "../axiosInstance";
 
 export interface IOrder{
@@ -16,6 +15,6 @@ export interface myOrderResponse {
 }
 
 export const getMyOrders = async()=>{
-    const {data} = await Axios.get<myOrderResponse>("/order/my-orders",requestConfigWithAuthToken);
+    const {data} = await Axios.get<myOrderResponse>("/order/my-orders");
     return data;
 }

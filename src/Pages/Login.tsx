@@ -1,20 +1,34 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import { ChangeEvent } from "react";
+import { ChangeEvent, useEffect } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { BiLock, BiLogIn, BiStore } from "react-icons/bi";
 import { HiMail } from "react-icons/hi";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ClipLoader from "react-spinners/ClipLoader";
 import { useErrorNotification } from "../hooks/useErrorNotification";
 import { useLogin } from "../hooks/useLogin";
 import { LoginPageImage } from "../utils/constants";
 import { loginFormValidationSchema } from "../utils/formSchema";
 import { LoginFormInitialValues } from "../utils/initialFormValues";
+import { getAuthFromLocalStorage } from "../utils/localStorage";
+
 
 
 
 const Login = () => {
-    
+
+    const navigate = useNavigate();
+    const { hasUser, role } = getAuthFromLocalStorage();
+
+    useEffect(() => {
+        if (hasUser) {
+            if (role === "admin")
+                navigate("/admin/dashboard", { replace: true });
+            else
+                navigate("/home");
+        }
+    }, [hasUser, role, navigate])
+
     const { handleLogin, isLoading, error, clearError } = useLogin();
     useErrorNotification(error.isError, error);
 
@@ -49,7 +63,7 @@ const Login = () => {
                         initialValues={LoginFormInitialValues}
                         validationSchema={loginFormValidationSchema}
                         onSubmit={(values) => {
-                            localStorage.setItem("rememberMe",JSON.stringify(values.rememberMe));
+                            localStorage.setItem("rememberMe", JSON.stringify(values.rememberMe));
                             handleLogin(values);
                         }}
                     >

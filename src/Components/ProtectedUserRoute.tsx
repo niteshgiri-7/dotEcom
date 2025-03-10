@@ -3,7 +3,6 @@ import { useAuth } from '../hooks/useAuth';
 import Loader from './Loader';
 
 const ProtectedUserRoute = () => {
-  console.log("protected Route")
   const { data: user, isPending } = useAuth();
 
   if (isPending) return <Loader />;

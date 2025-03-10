@@ -1,5 +1,4 @@
 import { OrderedItem } from "../../types/payment";
-import { requestConfigWithAuthToken } from "../axiosConfig";
 import Axios from "../axiosInstance";
 
 interface IVerifyPaymentPayload{
@@ -31,6 +30,6 @@ export const verifyPayment = async()=>{
    const payload = getPaymentVerificationPayload();
 
 
-    const {data} = await Axios.post<IverifyPaymentResponse>("/payment/verify",payload,requestConfigWithAuthToken)
+    const {data} = await Axios.post<IverifyPaymentResponse>("/payment/verify",payload)
     return data;
 }

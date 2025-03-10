@@ -1,22 +1,34 @@
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { Calendar, Image, Lock, Mail, Store, User, Users } from 'lucide-react';
-import { ChangeEvent, useRef } from 'react';
+import { ChangeEvent, useEffect, useRef } from 'react';
 import { Toaster } from 'react-hot-toast';
+import { Link, useNavigate } from 'react-router-dom';
 import ClipLoader from 'react-spinners/ClipLoader';
 import { useErrorNotification } from '../hooks/useErrorNotification';
 import { useSignUp } from '../hooks/useSignUp';
 import { LoginPageImage } from '../utils/constants';
 import { signUpFormValidationSchema } from '../utils/formSchema';
 import { signUpFromInitialValues } from '../utils/initialFormValues';
-import { Link } from 'react-router-dom';
+import { getAuthFromLocalStorage } from '../utils/localStorage';
 
 
 const SignUp = () => {
+  
+  const navigate = useNavigate();
+  const { hasUser, role } = getAuthFromLocalStorage();
+  useEffect(() => {
+    if (hasUser) {
+      if (role === "admin")
+        navigate("/admin/dashboard", { replace: true });
+      else
+        navigate("/home");
+    }
+  }, [hasUser, role, navigate])
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const { handleSignUp, isLoading, error ,clearError} = useSignUp();
-  
+  const { handleSignUp, isLoading, error, clearError } = useSignUp();
+
   useErrorNotification(error.isError, error);
 
   return (
@@ -88,14 +100,14 @@ const SignUp = () => {
                     autoComplete="username"
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white"
                     placeholder="you@example.com"
-                    onChange={(e:ChangeEvent<HTMLInputElement>)=>{setFieldValue("email",e.target.value); clearError()}}
+                    onChange={(e: ChangeEvent<HTMLInputElement>) => { setFieldValue("email", e.target.value); clearError() }}
                   />
                   <ErrorMessage
                     name="email"
                     component="div"
                     className="mt-1 text-sm text-red-600"
                   />
-                     <span className='text-sm text-red-600'>{error.message}</span>
+                  <span className='text-sm text-red-600'>{error.message}</span>
                 </div>
 
                 <div>
@@ -163,7 +175,7 @@ const SignUp = () => {
                     component="div"
                     className="mt-1 text-sm text-red-600"
                   />
-               
+
                 </div>
 
                 <div>

@@ -1,5 +1,4 @@
 import { ProductResponse } from "../types/product";
-import { requestConfigWithAuthToken } from "./axiosConfig";
 import Axios from "./axiosInstance";
 
 export const getAllProducts = async () => {
@@ -8,6 +7,6 @@ export const getAllProducts = async () => {
 }
 
 export const getProductDetails = async (id: number|string): Promise<ProductResponse> => {
-    const { data }: { data: ProductResponse } = await Axios.get(`/products/../${id}`,requestConfigWithAuthToken);
+    const { data }: { data: ProductResponse } = await Axios.get(`/products/../${id}`);
     return data;
 }

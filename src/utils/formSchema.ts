@@ -3,6 +3,7 @@ import * as Yup from "yup";
 const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
 const SUPPORTED_FORMATS = ["image/jpg", "image/jpeg", "image/png"];
 
+
 export const signUpFormValidationSchema = Yup.object().shape({
   name: Yup.string()
     .min(2, "Name must be at least 2 characters")
@@ -20,6 +21,10 @@ export const signUpFormValidationSchema = Yup.object().shape({
     .required("Password is required"),
   dob: Yup.date()
     .max(new Date(), "Date of birth cannot be in the future")
+    .min(
+      new Date(new Date().setFullYear(new Date().getFullYear() - 13)),
+      "Must be atleast 13 years old"
+    )
     .required("Date of birth is required"),
   photo: Yup.mixed<File>()
     .required("Photo is required")
@@ -36,30 +41,28 @@ export const signUpFormValidationSchema = Yup.object().shape({
     .required("Gender is required"),
 });
 
-
 //learnt about xss attacks, and yeah! validate gardimnata,below is the r.expression to test inputs
 
 const xssRegex = /(<([^>]+)>|javascript:|on\w+=)/i; // Matches <script>, <img>, event handlers, etc.
 
-export const loginFormValidationSchema= Yup.object().shape({
+export const loginFormValidationSchema = Yup.object().shape({
   email: Yup.string()
     .email("Invalid email")
     .required("Required")
-    .test('xss-check', 'Invalid input detected', value => {
+    .test("xss-check", "Invalid input detected", (value) => {
       if (!value) return true;
-      return !xssRegex.test(value); 
+      return !xssRegex.test(value);
     }),
 
   password: Yup.string()
     .min(6, "Must be at least 6 characters long")
     .max(20, "Too long")
-    .test('xss-check', 'Invalid input detected', value => {
+    .test("xss-check", "Invalid input detected", (value) => {
       if (!value) return true;
       return !xssRegex.test(value);
     })
     .required("Required"),
 });
-
 
 export const productFormSchema = Yup.object().shape({
   name: Yup.string()
@@ -82,10 +85,16 @@ export const productFormSchema = Yup.object().shape({
     .required("Required"),
 });
 
-
 export const checkOutFormSchema = Yup.object().shape({
-  city:Yup.string().min(5,"Too Short!").required("Required"),
-  state:Yup.string().min(5).required("Required"),
-  pinCode:Yup.number().required("Required").test("length","Must be 4-6 digits",(code)=>code.toString().length>=4 && code.toString().length<=6).typeError("Must be number"),
-  couponCode:Yup.string(),
-})
+  city: Yup.string().min(5, "Too Short!").required("Required"),
+  state: Yup.string().min(5).required("Required"),
+  pinCode: Yup.number()
+    .required("Required")
+    .test(
+      "length",
+      "Must be 4-6 digits",
+      (code) => code.toString().length >= 4 && code.toString().length <= 6
+    )
+    .typeError("Must be number"),
+  couponCode: Yup.string(),
+});
