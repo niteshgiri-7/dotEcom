@@ -13,6 +13,7 @@ import { store } from "./redux/store";
 import "./api/axiosInterceptor";
 import ProtectedAdminRoutes from "./Components/ProtectedAdminRoutes";
 import ProtectedUserRoute from "./Components/ProtectedUserRoute";
+import NotFound from "./Pages/NotFound";
 
 const Dashboard = lazy(() => import("./Pages/Admin/Dashboard"));
 const Products = lazy(() => import("./Pages/Admin/Products"));
@@ -64,7 +65,7 @@ function App() {
                 </Route>
 
               </Route>
-
+            <Route path="/*" element={<NotFound/>}/>
             </Routes>
           </Suspense>
         </Router>
