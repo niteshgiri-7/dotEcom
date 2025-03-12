@@ -15,6 +15,9 @@ An Ecommerce platform with separate user and admin interfaces, built with React,
 - 👤 User authentication
 
 ### Admin Features
+ **admin login credentials**
+ - email :- ` nitesh@gmail.com `
+ - password:- ` Test@123 `
 
 - 📊 Dashboard with growth analytics of user ,orders,products,and transactions of past months
 - 📦 Product management (CRUD operations)

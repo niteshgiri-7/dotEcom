@@ -1,7 +1,7 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import { ChangeEvent, useEffect } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
-import { BiLock, BiLogIn, BiStore } from "react-icons/bi";
+import { BiHide, BiLock, BiLogIn, BiShow, BiStore } from "react-icons/bi";
 import { HiMail } from "react-icons/hi";
 import { Link, useNavigate } from "react-router-dom";
 import ClipLoader from "react-spinners/ClipLoader";
@@ -31,6 +31,12 @@ const Login = () => {
 
     const { handleLogin, isLoading, error, clearError } = useLogin();
     useErrorNotification(error.isError, error);
+    const [isShowPassword, setIsShowPassword] = useState<boolean>(false);
+
+    const toggleShowPassword = () => {
+        console.log("helo")
+        setIsShowPassword(prev => !prev);
+    }
 
     return (
         <div className="min-h-screen flex">
@@ -98,7 +104,7 @@ const Login = () => {
                                         <BiLock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
                                         <Field
                                             id="password"
-                                            type="password"
+                                            type={isShowPassword?"text":"password"}
                                             name="password"
                                             autoComplete="current-pasword"
                                             className="pl-10 w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white"
@@ -106,6 +112,17 @@ const Login = () => {
                                             required
                                             onChange={(e: ChangeEvent<HTMLInputElement>) => { setFieldValue("password", e.target.value); clearError(); }}
                                         />
+                                        {
+                                            <div onClick={toggleShowPassword} className="absolute top-1/2 right-3 transform -translate-y-1/2 -translate-x-1/2 text-xl text-gray-800" >
+                                                {
+                                                    isShowPassword ?
+                                                        <BiShow />
+                                                        :
+                                                        <BiHide />
+
+                                                }
+                                            </div>
+                                        }
                                     </div>
                                     <ErrorMessage name="password" component="div" className="text-sm text-red-500" />
                                     <p className="text-sm text-red-600 mt-2">{error.message}</p>
