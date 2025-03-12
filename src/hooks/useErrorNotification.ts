@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 
 
 export const useErrorNotification = (isError:boolean,error:Error|null)=>{
-     console.log(isError,error)
+
     useEffect(()=>{
          if(isError && error){
            
